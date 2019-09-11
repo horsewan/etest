@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.PkgMapper">
+
+    <select id="getAppInfoByPkg" resultType="com.eningqu.domain.api.AppInfo">
+        SELECT id, app_name, app_pkg, signature, enable_status, create_time
+        FROM dy_team_agent
+        WHERE app_pkg = #{appPkg}
+    </select>
+
+    <select id="getAppInfoBySig" resultType="com.eningqu.domain.api.AppInfo">
+        SELECT id, app_name, app_pkg, signature, enable_status, create_time
+        FROM dy_team_agent
+        WHERE signature = #{signature}
+    </select>
+    <update id="updateAppInfoPhone">
+        UPDATE
+            dy_team_agent
+        SET signature = #{phone},
+            app_name=#{name}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

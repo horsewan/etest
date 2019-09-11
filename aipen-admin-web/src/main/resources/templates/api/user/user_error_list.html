@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+    <head>
+        <meta charset="utf-8">
+        <title>异常用户列表</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" href="favicon.ico"/>
+        <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+        <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+        <style>
+            tbody .layui-table-cell{
+                height: 50px;
+                line-height: 50px;
+            }
+            .noScroll{
+                overflow: hidden !important;
+            }
+        </style>
+    </head>
+    <body class="childrenBody">
+    <blockquote class="layui-elem-quote" style="padding: 10px 15px;margin-bottom: 0;">异常用户列表</blockquote>
+        <!--<form class="layui-form">-->
+            <!--查询-->
+    <blockquote class="layui-elem-quote quoteBox" style="padding: 0px 15px 10px 15px;">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" id="phone" class="layui-input searchVal" placeholder="手机号" />
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" id="nickName" class="layui-input searchVal" placeholder="客服编号" />
+                </div>
+                <button type="button" class="layui-btn" id="search">
+                    <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+            </div>
+        </form>
+    </blockquote>
+
+    <table id="userErrorList" lay-filter="userErrorList"></table>
+        <!--</form>-->
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/api/user-error-list.js}" ></script>
+    </body>
+</html>

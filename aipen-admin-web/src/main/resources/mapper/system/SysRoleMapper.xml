@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysRoleMapper">
+
+    <!--根据用户ID查询角色菜单权限-->
+    <select id="selectRoleMenus" resultType="com.eningqu.modules.system.vo.RoleMenusVO">
+        SELECT
+            a.id,
+            a.pid,
+            a.title,
+            IF( b.menu_id IS NOT NULL, TRUE, FALSE ) AS checked
+        FROM
+            (
+                SELECT
+                    sm.id,
+                    sm.pid,
+                    sm.title
+                FROM
+                    sys_menu AS sm
+                WHERE
+                    sm.del_status = #{delStatus}
+                    ORDER BY sm.sort ASC
+            ) AS a
+        LEFT JOIN (
+                SELECT
+                    srm.menu_id
+                FROM
+                    sys_role AS sr
+                    LEFT JOIN sys_role_menu AS srm ON srm.role_id = sr.id
+                WHERE
+                    sr.id = #{id}
+                    AND sr.del_status = #{delStatus}
+            ) AS b
+            ON a.id = b.menu_id
+    </select>
+
+    <!--根据角色ID删除权限菜单-->
+    <delete id="delRoleMenus">
+        DELETE FROM sys_role_menu WHERE role_id = #{id}
+    </delete>
+
+    <!--批量插入权限菜单-->
+    <insert id="batchInsertRoleMenus">
+        INSERT INTO sys_role_menu(role_id, menu_id) VALUES
+        <foreach collection="menuIds" item="item" separator=",">
+            (#{roleId}, #{item})
+        </foreach>
+    </insert>
+
+    <!--根据角色ID批量删除权限菜单-->
+    <delete id="batchDeleteRoleMenus">
+        DELETE FROM sys_role_menu WHERE role_id = #{id}
+    </delete>
+
+</mapper>

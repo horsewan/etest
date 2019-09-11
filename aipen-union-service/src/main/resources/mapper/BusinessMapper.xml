@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.BusinessMapper">
+
+    <select id="selectByTicketAndSingleNo" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id, b_name, b_ticket, b_single_no, b_person, b_phone, b_type, b_address, b_sole_price, b_price, b_sign, b_cdn_qr, create_time, update_time, remarks, address_x, address_y
+        FROM
+        dy_business_info
+        WHERE
+        b_ticket = #{ticket}
+          AND
+        b_single_no = #{singleNo}
+    </select>
+
+    <select id="selectByPhone" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id,b_sign
+        FROM
+        dy_business_info
+        WHERE
+        b_phone = #{phone}
+    </select>
+</mapper>

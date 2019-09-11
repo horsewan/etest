@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.UserAddressMapper">
+    <resultMap id="userAddressMap" type="com.eningqu.domain.api.UserAddress">
+        <result column="id" property="id" />
+        <result column="uid" property="uId" />
+        <result column="a_nick" property="aNick" />
+        <result column="a_phone" property="aPhone" />
+        <result column="a_address" property="aAddress" />
+        <result column="is_def" property="isDef" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_id" property="updateId" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <select id="selectUserAddressByAUID" resultType="com.eningqu.domain.api.UserAddress">
+        SELECT id, uid, a_nick, a_phone, a_address, create_id, create_time, update_id, update_time,is_def FROM nq_user_address where uid=#{uid} AND id=#{aid};
+    </select>
+    <select id="selectUserAddressByUid" resultType="com.eningqu.domain.api.UserAddress">
+        SELECT id, uid, a_nick, a_phone, a_address, create_id, create_time, update_id, update_time,is_def FROM nq_user_address where uid=#{uid} AND is_def='Y' limit 1;
+    </select>
+    <select id="selectUserAddressByUidAndTime" resultType="com.eningqu.domain.api.UserAddress">
+        SELECT id, uid, a_nick, a_phone, a_address, create_id, create_time, update_id, update_time,is_def FROM nq_user_address where uid=#{uid} order by create_time desc limit 1;
+    </select>
+    <select id="selectUserAddressByids" resultMap="userAddressMap">
+        SELECT id, uid, a_nick, a_phone, a_address, create_id, create_time, update_id, update_time,is_def FROM nq_user_address where uid=#{uid} AND id in (#{adidOld},#{adidNew});
+    </select>
+    <select id="selectIdByUid" resultType="com.eningqu.domain.api.UserAddress">
+        SELECT id FROM nq_user_address where uid=#{uid} order by update_time desc limit 1;
+    </select>
+
+    
+</mapper>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+    <style>
+        .layui-form-label{
+            width: 90px;
+        }
+        .layui-input-block {
+            margin-left: 120px
+        }
+    </style>
+</head>
+<body class="childrenBody">
+    <form class="layui-form">
+        <input class="layui-hide appId" name="appId" th:value="${appId}" />
+        <input class="layui-hide speechType" name="speechType" value="" />
+        <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+            <label class="layui-form-label required">应用名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="appName" class="layui-input appName" lay-verify="required" readonly />
+            </div>
+        </div>
+        <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+            <label class="layui-form-label required">应用包名</label>
+            <div class="layui-input-block">
+                <input type="text" name="appPkg" class="layui-input appPkg" lay-verify="required" readonly />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <!-- <label class="layui-form-label">语音服务器配置</label> -->
+            <table id="appServerTableList" lay-filter="appServerTableList"></table>
+        </div>
+        <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+            <div class="layui-input-block">
+                <button id="close" type="button" class="layui-btn layui-btn-sm layui-btn-danger">关闭页面</button>
+                <button id="subBtn" type="button" class="layui-btn layui-btn-sm">保存设置</button>
+            </div>
+        </div>
+    </form>
+    
+    <script th:inline="javascript">
+        var list = [[${list}]]
+    </script>
+    <script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/sys/app-server.js}" ></script>
+</body>
+</html>

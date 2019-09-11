@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.UserCreditRecordMapper">
+    <resultMap id="userCreditRecordList" type="com.eningqu.vo.UserCreditRecordTemp">
+        <result column="vip_hongbao" property="vipHongbao" />
+    </resultMap>
+
+    <select id="selectUserCreditRecordById" resultType="com.eningqu.domain.api.UserCreditRecord">
+        SELECT id,uid,vip_hongbao FROM nq_user_vip_record WHERE uid = #{uid} AND vip_hongbao=#{hongbaoId} And date(create_time) = curdate() AND vip_status=1;
+    </select>
+
+    <select id="selectUserCreditRecordStaById" resultMap="userCreditRecordList">
+        SELECT vip_hongbao FROM nq_user_vip_record where uid=#{uid} and vip_hongbao in(SELECT id FROM dy_product where one_class=#{oneClass}) And date(create_time) = curdate();
+    </select>
+
+
+</mapper>

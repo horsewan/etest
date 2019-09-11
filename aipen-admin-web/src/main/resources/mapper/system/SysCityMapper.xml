@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysCityMapper">
+
+    <select id="selectByCityName" resultType="com.eningqu.domain.system.SysCity">
+        SELECT id, city_no, city_name, agent_no FROM sys_city where city_name=#{cityName};
+    </select>
+
+    <select id="selectByShengName" resultType="com.eningqu.domain.system.SysCity">
+        SELECT id, sheng_no,sheng_name,city_no, city_name, agent_no FROM sys_city where sheng_name=#{shengName};
+    </select>
+</mapper>

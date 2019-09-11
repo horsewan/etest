@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.eningqu.domain.system.SysUser">
+        <result column="id" property="id" />
+        <result column="create_id" property="createId" />
+        <result column="update_id" property="updateId" />
+        <result column="login_name" property="loginName" />
+        <result column="login_pwd" property="loginPwd" />
+        <result column="emp_id" property="empId" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="user_type" property="userType" />
+        <result column="del_status" property="delStatus" />
+    </resultMap>
+
+    <!--根据LoginName查询用户-->
+    <select id="selectByLoginName" resultType="com.eningqu.domain.system.SysUser">
+        SELECT * FROM sys_user a WHERE a.login_name = #{loginName} AND a.del_status = #{delStatus}
+    </select>
+
+    <!--根据Phone查询用户-->
+    <select id="selectByPhone" resultType="com.eningqu.domain.system.SysUser">
+        SELECT * FROM sys_user a WHERE a.phone = #{phone} AND a.del_status = #{delStatus}
+    </select>
+
+    <!--根据用户ID查询菜单权限-->
+    <select id="selectPermById" resultType="java.lang.String">
+      SELECT
+        sm.perm
+      FROM
+        sys_user_role AS sur
+        LEFT JOIN sys_role AS sr ON sur.role_id = sr.id
+        LEFT JOIN sys_role_menu AS srm ON srm.role_id = sr.id
+        LEFT JOIN sys_menu AS sm ON sm.id = srm.menu_id
+      WHERE
+        sur.user_id = #{id}
+        AND sr.del_status = #{delStatus}
+        AND sm.del_status = #{delStatus}
+    </select>
+
+    <!--根据用户ID 查询用户角色-->
+    <select id="selectUserRoles" resultType="com.eningqu.modules.system.vo.UserRolesVO">
+        SELECT
+            sr.id AS value,
+            sr.role_name AS name,
+            IF( sur.role_id IS NOT NULL, TRUE, FALSE ) AS selected
+        FROM
+            sys_role AS sr
+        LEFT JOIN
+        (
+            SELECT
+                role_id
+            FROM
+                sys_user_role
+            WHERE user_id = #{id}
+        ) AS sur
+        ON sr.id = sur.role_id
+        WHERE sr.del_status = #{delStatus}
+    </select>
+
+    <!--根据用户ID解除绑定角色-->
+    <delete id="delUserRoles">
+        DELETE FROM sys_user_role WHERE user_id = #{id}
+    </delete>
+
+    <!--批量插入角色-->
+    <insert id="batchInsertUserRoles">
+        INSERT INTO sys_user_role(user_id, role_id) VALUES
+        <foreach collection="roleIds" item="item" separator=",">
+            (#{id}, #{item})
+        </foreach>
+    </insert>
+
+    <!--根据用户ID查询菜单列表(只包含目录和页面菜单)-->
+    <resultMap id="menuVoMap" type="com.eningqu.modules.system.vo.MenuVo">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="icon" property="icon" />
+        <result column="href" property="href" />
+        <result column="pid" property="pid" />
+        <result column="target" property="target" />
+    </resultMap>
+    <select id="selectMenusForUser" resultMap="menuVoMap">
+        SELECT
+            sm.id,
+            sm.title,
+            sm.icon,
+            sm.href,
+            sm.pid,
+            sm.target
+        FROM
+            sys_user_role AS sur
+            LEFT JOIN sys_role AS sr ON sur.role_id = sr.id
+            LEFT JOIN sys_role_menu AS srm ON srm.role_id = sr.id
+            LEFT JOIN sys_menu AS sm ON sm.id = srm.menu_id
+        WHERE
+          sur.user_id = #{id}
+        AND sm.menu_type IN
+        <foreach collection="menuType" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        AND sr.del_status = #{delStatus}
+        AND sm.del_status = #{delStatus}
+        ORDER BY sm.sort ASC
+    </select>
+
+    <!--更新删除状态-->
+    <update id="updateDelStatus">
+      UPDATE sys_user SET del_status = #{delStatus} WHERE id = #{id}
+    </update>
+
+    <!--更新手机号-->
+    <update id="updateUserPhone">
+        UPDATE sys_user SET phone = #{phone},name=#{name} WHERE id = #{id}
+    </update>
+
+    <!--查询超级管理员菜单列表(只包含目录和页面菜单)-->
+    <select id="selectMenusForSuperAdmin" resultMap="menuVoMap">
+        SELECT
+            sm.id,
+            sm.title,
+            sm.icon,
+            sm.href,
+            sm.pid,
+            sm.target
+        FROM
+            sys_menu AS sm
+        WHERE
+            sm.del_status = #{status} AND
+            sm.menu_type IN
+            <foreach collection="menuType" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        ORDER BY sm.sort ASC
+    </select>
+
+    <!--查询超级管理员权限-->
+    <select id="selectSuperPerm" resultType="java.lang.String">
+      SELECT
+        sm.perm
+      FROM
+        sys_menu AS sm
+      WHERE
+        sm.del_status = #{status}
+    </select>
+
+    <select id="selectByLoginNameSplit" resultType="com.eningqu.domain.system.SysUser">
+        SELECT login_name FROM sys_user WHERE login_name =#{loginName} AND del_status = 'Y'
+    </select>
+</mapper>

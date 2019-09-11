@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.BusinessMapper">
+
+    <select id="queryByWhere" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id, b_name, b_ticket, b_single_no, b_person, b_phone, b_type, b_address, b_sole_price, b_price, create_time, update_time, remarks
+        FROM
+        dy_business_info
+        WHERE
+        b_phone = #{phone}
+        LIMIT 1
+    </select>
+    <select id="queryByTicket" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id, b_name, b_ticket, b_single_no, b_person, b_phone, b_type, b_address, b_sole_price, b_price, create_time, update_time, remarks
+        FROM
+        dy_business_info
+        WHERE
+        b_ticket = #{ticket}
+        LIMIT 1
+    </select>
+    <update id="updateBusinessById">
+        UPDATE
+        dy_business_info
+        SET
+        b_name = #{bName},
+        b_phone = #{bPhone},
+        b_person = #{bPerson},
+        b_address = #{bAddress},
+        b_sole_price = #{bSolePrice},
+        b_price = #{bPrice}
+        WHERE
+        id = #{id}
+    </update>
+    <update id="updateSignById">
+        UPDATE
+        dy_business_info
+        SET
+        b_sign = #{bSign},
+        b_cdn_qr = #{bCdnQr}
+        WHERE
+        id = #{id}
+    </update>
+    <update id="updateBusinessUnionById">
+        UPDATE
+        dy_business_info
+        SET
+        mch_id = #{macid},
+        mch_key = #{mackey},
+        mch_sta = #{mchSta}
+        WHERE
+        id = #{id}
+    </update>
+</mapper>

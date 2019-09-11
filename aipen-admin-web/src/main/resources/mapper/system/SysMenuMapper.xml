@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysMenuMapper">
+
+    <!--根据用户ID查询菜单列表(只包含目录和页面菜单)-->
+    <resultMap id="menuVoMap" type="com.eningqu.modules.system.vo.MenuVo">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="icon" property="icon" />
+        <result column="href" property="href" />
+        <result column="pid" property="pid" />
+    </resultMap>
+    <select id="selectMenuForUser" resultMap="menuVoMap">
+        SELECT
+            sm.id,
+            sm.title,
+            sm.icon,
+            sm.href,
+            sm.pid
+        FROM
+            sys_user_role AS sur
+            LEFT JOIN sys_role AS sr ON sur.role_id = sr.id
+            LEFT JOIN sys_role_menu AS srm ON srm.role_id = sr.id
+            LEFT JOIN sys_menu AS sm ON sm.id = srm.menu_id
+        WHERE
+            sur.user_id = #{id}
+            AND sm.menu_type IN
+            <foreach collection="menuType" item="item" open="(" close=")" separator=",">
+              #{item}
+            </foreach>
+            AND sr.del_status = #{delStatus}
+            AND sm.del_status = #{delStatus}
+            ORDER BY sm.sort ASC
+    </select>
+
+    <!--查询父级菜单选择的下拉列表值-->
+    <select id="queryMenuSelects" resultType="com.eningqu.modules.system.vo.MenuSelectVO">
+        SELECT
+            sm.id,
+            sm.title,
+            sm.menu_type as menuType,
+            sm.pid
+        FROM
+          sys_menu AS sm
+        WHERE
+          sm.menu_type IN
+        <foreach collection="menuTypes" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        AND sm.del_status = #{delStatus}
+        ORDER BY sm.sort ASC
+    </select>
+
+    <!--更新菜单状态为删除-->
+    <update id="updateMenusStatus">
+        UPDATE sys_menu SET del_status = #{delStatus} WHERE id IN
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+    </update>
+</mapper>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>磁盘信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}"  media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <!--查询-->
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" id="uid" class="layui-input searchVal" placeholder="用户UID" />
+                </div>
+                <button type="button" class="layui-btn" id="search">
+                    <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+            </div>
+        </form>
+    </blockquote>
+
+    <table id="diskList" lay-filter="diskList"></table>
+
+    <div>
+        <script type="text/javascript">
+            var auth_edit = 'layui-hide';
+        </script>
+    </div>
+    <div shiro:hasPermission="ap:disk:edit">
+        <script type="text/javascript">
+            auth_edit = '';
+        </script>
+    </div>
+    <!--操作-->
+    <script type="text/html" id="operateBar">
+
+    </script>
+</form>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/api/disk-list.js}" ></script>
+</body>
+</html>

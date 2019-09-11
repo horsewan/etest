@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <input class="layui-hide id" name="id" th:value="${user.id}" />
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">登录名</label>
+        <div class="layui-input-block">
+            <input type="text" name="loginName" class="layui-input layui-disabled loginName" lay-verify="required" th:value="${user.loginName}" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">真实姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" class="layui-input name" lay-verify="required" th:value="${user.name}" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4 layui-hide">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block sex" lay-verify="mustradio" lay-verify-msg = "请选择性别">
+            <input type="radio" name="sex" value="M" title="男" th:checked="${user.sex == 'M'}" />
+            <input type="radio" name="sex" value="F" title="女" th:checked="${user.sex == 'F'}" />
+        </div>
+    </div>
+    <!--<div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">电子邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" name="email" class="layui-input email" lay-verify="required|email" th:value="${user.email}" />
+        </div>
+    </div>-->
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">联系方式</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" class="layui-input layui-disabled phone" lay-verify="required|phone" th:value="${user.phone}" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-sm" lay-submit lay-filter="save">立即保存</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
+<script type="text/javascript" th:src="@{/js/sys/user-info.js}" ></script>
+</body>
+</html>

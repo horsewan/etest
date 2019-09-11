@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>使用指南</title>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <style>
+
+        *{
+            font-family: "Microsoft YaHei";
+        }
+
+        .lay-guide .lay-guide-title {
+            position: relative;
+            height: 55px;
+            width: 100%;
+            line-height: 28px;
+            display: table;
+        }
+        .middle{
+            display:table-cell;
+            vertical-align:middle;
+        }
+
+        .lay-guide .lay-guide-title:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #CCCCCC;
+        }
+
+        .lay-guide > .layui-row {
+            padding: 0px 15px;
+        }
+
+        .lay-guide > .layui-row:active {
+            background-color: #E7E7E7;
+        }
+
+        .lay-guide .lay-guide-icon {
+            margin-top: 10px;
+            float: right;
+            color: #999999
+        }
+
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        span {
+            font-size: 16px;
+        }
+
+        .lay-guide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #FFFFFF;
+        }
+
+        .lay-btn-close {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 30px !important;
+        }
+
+        .lay-btn-close:after {
+            position: absolute;
+            content: '';
+            width: 2px;
+            height: 20px;
+            top: -14px;
+            left: 14px;
+            background-color: #000000;
+        }
+
+        img {
+            width: 100% !important;
+            height: auto;
+        }
+
+        .model-title {
+            background-color: #959595;
+            font-size: 14px;
+            color: white;
+            padding: 2px 8px;
+            display: inline-block;
+            margin: 15px 0px 25px 0px;
+        }
+
+        .model-content {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 25px;
+            word-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-container lay-guide" style="padding: 0px; overflow-y: visible;">
+    <div class="layui-row" lay-item="item-1">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon">&#xe602;</i>
+                <span>外觀和結構</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-2">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right;">&#xe602;</i>
+                <span>如何連接藍牙翻譯棒？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-3">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>藍牙翻譯棒有哪些功能？</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-row" lay-item="item-4">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>無法開機？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-5">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>連接時找不到設備？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-6">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>對話翻譯如何使用？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-7">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>錄音翻譯如何使用？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-8">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>AI助手如何使用？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-9">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>充電需要注意什麼？</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--外观和结构-->
+<div id="item-1" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >外觀說明文本如下：</span>
+        <img th:src="@{/images/guide/bl/bl_guide_cht_1-1.png}"/>
+        <div style="text-align: left;font-size: 25px; margin: 10px 20px;">
+            <p >功能鍵</p>
+            <div class="model-content">
+                開關機鍵POWER &nbsp;&nbsp;&nbsp;&nbsp; 圖示:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-1.png}"  ><br />
+                AI助手功能鍵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 圖示:
+                <img style="width: 20px !important; height: 20px !important" th:src="@{/images/guide/bl/icon_1-2.png}"  ><br />
+                采音功能鍵A、B鍵 &nbsp; 圖示:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-3.png}"  >
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-4.png}"  ><br />
+                錄音功能鍵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 圖示:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-5.png}"  >
+            </div>
+            <p >其他外觀</p>
+            <div class="model-content">
+                充電介面 Micro 5pin<br />
+                采音孔（麥克風）<br />
+                喇叭孔 <br />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--如何连接蓝牙翻译棒-->
+<div id="item-2" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">連接藍牙翻譯棒步驟如下：</span>
+        <p class="model-content">1、首次開啟藍牙翻譯設備，長按3秒以上電源鍵開機。</p>
+        <p class="model-content">2、打開手機端藍牙開關，手機藍牙端會自動搜索到藍牙設備名稱：BL Translator。</p>
+        <p class="model-content">3、開啟手機WIFI或移動資料流程量。</p>
+        <p class="model-content">4、部分手機系統需要開啟GPS定位才能連接藍牙，如無法連接，請打開GPS再次連接。</p>
+        <p class="model-content">5、點擊圖示進入APP介面，閱讀操作指引，閱讀到第三張操作指引等待5秒會自動跳轉到APP翻譯介面，也可以點擊右上角“跳過”提示直接進入APP。</p>
+        <p class="model-content">6、APP介面顯示藍牙連接視窗，點擊匹配藍牙設備的名稱連接，連接成功後藍牙設備會有提示語“藍牙連接成功”。</p>
+    </div>
+</div>
+
+<!--蓝牙翻译棒有哪些功能-->
+<div id="item-3" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">藍牙翻譯棒功能如下：</span>
+        <div>
+            <p class="model-content" style="font-weight: bold">1、對話翻譯：</p>
+            <div class="model-content" style="text-indent:2em;">打開“BL Translator” app進入主介面，首先進入對話翻譯介面（如下圖所示），該介面巡覽列左側“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />
+                ”為功能功能表列；中間為翻譯語言項，點擊可選擇不同的語言，分A紅色和B藍色；點擊中間的箭頭圖示可以把左右兩側的語音切換位置；右側“●●●
+                ”為收藏按鈕（收藏的對話內容可在此處進行查看，刪除等）；巡覽列下方為會話翻譯工作區，左側（對應巡覽列語言區的左側語言）由翻譯棒的功能A語言鍵控制，右側（對應巡覽列語言區的右側語言）由功能B語言鍵控制。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-1.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">翻譯介面</p>
+            <div class="model-content" style="text-indent:2em;">
+                當按下A語言鍵後，開始說話（如下圖所示，螢幕上有請說中文的提示），鬆開按鍵後就會即時翻譯為另一邊你選擇的目的語言，並且有語音即時播報，翻譯的內容會在螢幕上顯示，可滑動查看翻譯記錄。再次點擊翻譯的語句，都會有語音進行播報。同時支援語音、鍵盤雙輸入，點擊螢幕下方的小鍵盤圖示，可以輸入你要翻譯的文本內容，點擊“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKYSURBVFhH7ZiLVeswDIY7QkfoCIzACGwAG8AIbAAbwAYwQTsCbAAbwAbcT+lvIydOmodTCjffOTp1ZFmWH5WdrAax2+2+VPzGlMhZfPC/Cdvt9kXFUtDPhYrf0M9TDMBHQnmt4h6rRB71eGxsQhRCOlt1Bc8bGT5LlaLKqpHKm6riEKHRX2PQuDRjX6zHTqp2nPGnVHtQprsLgrEeU+qVePxoNQ6o0VpyeJDBsJdxYJCxYb2o+D/DEj6oWA6cVvls8CoeAscx/2TkSmbDofFNzZlJd0rC4NwZ30rdwNmYNPN/F74xw3+TugLdrauftp+do2rB3POwiLvAWYyY0aT5qBQ4f0T2B/zCwlFgx1k2yF93psJ/pTppkdY0MwocxsPWxDKsqqZTdx5E1dPAUdZ5EJmNJ+cUKXP3zjjut3NYIDtbO1Oy2y1B+p0NvqFUDbB5CDaU+6dwGiRnrI1EVRH04b3B6l+l7g8Nr4IDE6kjQT/KeQAHsRMcfUhtU/Mm3fSTDUf+cLfcEm8bMpkOkb4Hp8WdB2od9HvPGwJOw3rcS1Ue60DFhYWFhZOC/LQmncezGSl7VZwLgr5zQXuZL5tPheBstru+RgQ5rfdQAuobuJcbNf85CGJw4Njb9eYesQtC+ZtHXwjE/zGzgs0nv3bpK/NlEoeXKo6GYPw3roZohot+IdrgNC4zZbtTj5oR7ycjZfc0nV1nOqmEOnuv6r3/sE3eYoLgx7bIfBkF59mOnZzLtJXcrKN75fd4X9zprGsg2ZMRfWOvHz3wOnTeNpDkSwTPluZi/exbZSgE8+wDNNFWsbxevTg7+fkDJweBndUCTcS2i0xPFwK1GbftUR9AuTw+NwQbB/ErZj2HzTjyO+7pCwt/ltXqH7SicNfFVqNEAAAAAElFTkSuQmCC" />”圖示發送即可實現翻譯功能。
+            </div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_cht_3-2.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-3.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">拾音和鍵盤輸入介面</p>
+            <div class="model-content" style="text-indent:2em;">左右兩邊的語言語種都有42種，可以根據需求自由選擇，點擊巡覽列的語言選項就會彈出待選語言項，可以進行自由選擇，下圖為翻譯棒支援的部分語言。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-4.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">語言選擇介面</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">2、錄音翻譯：</p>
+            <div class="model-content" style="text-indent:2em;">點擊翻譯介面左上角的圖示“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />”進入功能功能表列，點擊“錄音翻譯”進入錄音翻譯介面；或短按錄音翻譯鍵直接進入（如下圖所示）。</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_cht_3-5.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-6.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">錄音翻譯和錄音翻譯拾音介面</p>
+            <div class="model-content" style="text-indent:2em;">長按錄音翻譯鍵3秒，螢幕上彈出“開始錄音”提示框後開啟錄音，並帶有提示音表示已開啟；對著翻譯棒錄入想要說的話語，錄音過程中每5秒亮燈一次，表示正在錄音；錄完後長按下錄音翻譯鍵3秒關閉錄音，並帶有提示音表示已關閉，翻譯棒就會自動翻譯。</div>
+            <div class="model-content" style="text-indent:2em;">翻譯的會話內容會自動保存在錄音翻譯介面右下方的“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVEhL7ZcBDcIwEEUnAQlIwAFIQAJScIAUcAAOmANwAA7gPtwnR3slZG3YMvqSl27NRtpe71ibFK14Ux9EHUvxoMbw0dcrbgff36FjHCy0DecLv2OmbfdfmGjL5bX+mLm2/bHRth8QCgZuLYYB9TyJlZIwITrD0AAbqk8i3AMC9ZqlpROY0/V5Gc015cDW4ChySBfRG3Lo25ph/qyiYWVNORUrlcKgpnEP79GhIM9xX8qt6G5hDIBfhTbPVyLyxCZRjmcxq3CNFywLlwl7gSAEXixzTIYAGw4f8PYBDMCrhTnWPeCCA4dNF2IPbKVM/p2jFvDkU/kHmuYOlae/88JxEM0AAAAASUVORK5CYII=" />”功能表列裡。點擊任意一個檔，都會自動識別翻譯並進行播報。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-7.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">錄音翻譯內容保存介面</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">3、AI 助手：</p>
+            <div class="model-content" style="text-indent:2em;">點擊翻譯介面左上角的圖示“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />”進入功能功能表列，點擊“AI助手”進入AI助手介面；也可短按AI助手鍵直接進入（如下圖所示）。</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_cht_3-8.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_cht_3-9.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">AI助手和AI助手拾音介面</p>
+            <div class="model-content" style="text-indent:2em;">按下AI助手鍵或者螢幕上的語言標誌，對著翻譯棒說出你想要做的事情，比如我問“深圳今天的天氣怎麼樣？”AI助手會馬上回答出今天深圳的天氣情況，還會提出保暖建議等；或者我想聽劉德華的“忘情水”，鬆開按鍵後，劉德華的“忘情水”就開始播放了。</div>
+            <div class="model-content" style="text-indent:2em;">除了播放音樂外，AI助手還可以做很多事情，比如聽新聞、廣播、故事、相聲、小品，查股票等等，更多新奇的玩法等待您發掘喲！</div>
+        </div>
+    </div>
+</div>
+
+<!--无法开机-->
+<div id="item-4" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">無法開機原因如下：</span>
+        <p class="model-content">1、請檢查藍牙翻譯設備是否有電，用充電器連接設備，設備會有LED等提示，表示正常充電，充電10分鐘後再長按電源鍵3秒以上進行開機。</p>
+        <p class="model-content">2、請確認是否按下電源鍵開機？電源鍵為正上方按鍵。</p>
+        <p class="model-content">3、請確認是否長按電源鍵3秒以上。</p>
+    </div>
+</div>
+
+<!--连接时找不到设备-->
+<div id="item-5" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">連接時找不到設備原因如下：</span>
+        <p class="model-content">1、請檢查手機端藍牙視窗是是否開啟。</p>
+        <p class="model-content">2、請檢查藍牙翻譯設備是否開機成功。</p>
+        <p class="model-content">3、請確認手機和藍牙設備是否在可連接的距離範圍以內。</p>
+        <p class="model-content">4、請確認手機GPS定位是否開啟（只限部分手機系統）。</p>
+        <p class="model-content">5、請確認手機是否開啟網路（WIFI或移動資料流程量），聯網狀態下才能連接。</p>
+    </div>
+</div>
+
+<!--对话翻译如何使用-->
+<div id="item-6" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >對話翻譯如何使用？</span>
+        <p style="text-indent:2em;">打開APP翻譯介面，介面上方有語言選擇欄，分A紅色和B藍色提示框對應兩種語言。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_cht_6-1.png}"/>
+        <p style="text-indent:2em;">在藍牙翻譯棒上有“A、B”兩個按鍵，分別對應APP中的語言欄，A對應左語言欄，B對應右語言欄。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_cht_6-2.png}"/>
+        <p style="text-indent:2em;">注意：手握請勿遮擋采音孔</p>
+    </div>
+</div>
+
+<!--录音翻译如何使用-->
+<div id="item-7" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >錄音說明文本如下:</span>
+        <p style="text-indent:2em;">長按錄音鍵3秒開啟錄音，並帶有提示音表示已開啟。錄音過程中每5秒亮燈一次，表示正在錄音。長按錄音鍵3秒關閉錄音，並帶有提示音表示已關閉。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_cht_7-1.png}"/>
+    </div>
+</div>
+
+<!--AI助手如何使用-->
+<div id="item-8" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >AI助手說明文檔如下：</span>
+        <p style="text-indent:2em;">長按AI 鍵采音收集語音指令，鬆開按鍵設備自動播報。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_cht_8-1.png}"/>
+    </div>
+</div>
+
+<!--充电需要注意什么-->
+<div id="item-9" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">充電注意如下：</span>
+        <p class="model-content">1、標準充電為5V~0.5A，請勿長期使用規格大於2.5W（0.5A/5V）的充電器，過大功率會引起設備電池損傷。</p>
+        <p class="model-content">2、設備充電時間勿超過5小時。</p>
+        <p class="model-content">3、充電一次一個迴圈（1%~100%），以保證電池的使用壽命，電量可通過APP 端進行查看，電池充滿後設備上LED 燈會停止亮燈。</p>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer, $ = layui.jquery;
+
+
+        // 点击展开详细
+        $('.layui-row').on('click', function () {
+
+            var _dom = $(this).attr("lay-item");
+            if (_dom) {
+                var index = layer.open({
+                    type: 1,
+                    title: false,
+                    anim: 2,
+                    resize: false,
+                    closeBtn: 0,
+                    shade: false,
+                    content: $('#' + _dom)
+                });
+                layui.layer.full(index);
+            }
+        });
+
+        $('.lay-btn-close').on('click', function () {
+            layer.closeAll();
+        })
+
+    });
+</script>
+</body>
+</html>

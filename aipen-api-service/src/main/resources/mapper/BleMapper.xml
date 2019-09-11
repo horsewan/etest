@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.BleMapper">
+
+    <select id="selectOneBle" resultType="com.eningqu.domain.api.BleDevice">
+        SELECT
+          id,
+          mac,
+          ausn,
+          enable_status AS enableStatus
+        FROM
+          dy_single_agent
+        WHERE
+          mac = #{mac}
+          LIMIT 1
+    </select>
+
+    <select id="selectOneByAusn" resultType="com.eningqu.domain.api.BleDevice">
+        SELECT
+          id,
+          mac,
+          ausn,
+          enable_status AS enableStatus
+        FROM
+          dy_single_agent
+        WHERE
+          ausn = #{ausn}
+          LIMIT 1
+    </select>
+
+    <update id="updateBleDeviceAusn">
+        UPDATE dy_single_agent
+        SET ausn = #{ausn}
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="QueryOneByWhere" resultType="com.eningqu.vo.BleDeviceBindVO">
+        SELECT
+            x.id AS bleId,
+            x.mac AS bleMac,
+            x.ausn AS bleAusn,
+            x.enable_status AS enableStatus,
+            y.imei AS phoneImei,
+            y.phone_sn AS phoneSn
+        FROM
+            dy_single_agent AS x
+            LEFT JOIN dy_single_agent_bind AS y ON x.id = y.ble_id
+        WHERE
+            x.mac = #{bleMac}
+            AND
+            x.pkg_id = #{pkgId}
+        LIMIT 1
+    </select>
+
+    <select id="getBleDeviceOne" resultType="com.eningqu.domain.api.BleDevice">
+        SELECT id, mac, ble_sn, ausn, enable_status, create_time FROM dy_single_agent where enable_status='Y' and ble_sn is null limit 1;
+    </select>
+
+    <select id="getBleDeviceOneByAusn" resultType="com.eningqu.domain.api.BleDevice">
+        SELECT id, mac, ble_sn, ausn, enable_status, create_time FROM dy_single_agent where ausn like '${ausn}%' and enable_status='Y' and ble_sn is null limit 1;
+    </select>
+
+    <select id="getBleDeviceCountByAusn" resultType="java.lang.Integer">
+        SELECT count(id) as bleCount FROM dy_single_agent where ausn like '${ausn}%' and enable_status='Y' and ble_sn is null limit 1;
+    </select>
+
+    <update id="updateBleSn">
+        UPDATE dy_single_agent
+        SET ble_sn = #{bleSn}
+        WHERE
+            id = #{bleId}
+    </update>
+</mapper>

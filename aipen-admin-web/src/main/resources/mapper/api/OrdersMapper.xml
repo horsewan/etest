@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.OrdersMapper">
+
+    <!--查询订单详情-->
+    <select id="selectOrderDetailList" resultType="com.eningqu.modules.api.vo.OrderDetailVO">
+        SELECT a.order_price    AS orderPrice,
+               a.order_quantity AS orderQuantity,
+               b.product_name   AS productName,
+               b.sale_price     AS productSalePrice
+        FROM dy_orders_detail AS a
+                 LEFT JOIN dy_product AS b ON a.product_id = b.id
+        WHERE a.order_number = #{orderNumber}
+    </select>
+
+    <!--更新物流信息-->
+    <update id="updateExp">
+        UPDATE dy_orders
+        SET exp_code = #{expCode},
+            exp_no   = #{expNo}
+        WHERE order_number = #{orderNumber}
+    </update>
+
+    <select id="selectFinanceList" resultType="com.eningqu.domain.api.FinanceListResult" parameterType="Map">
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        IFNULL(count( a.id ),0) AS nums,
+        sum( amount_realpay ) AS amountRealpay,
+        IFNULL(sum( amount_payable - amount_realpay ),0) AS money ,
+        IFNULL(d.amountRealpay,0) AS shopPercentage,
+        IFNULL(d.shopNums,0) as shopNums
+        FROM
+        dy_orders a
+        INNER JOIN nq_user_info b ON a.uid = b.id
+        INNER JOIN dy_single_agent c ON b.agent_no = c.ausn
+        left join (
+        SELECT
+        count( a.id ) AS shopNums,
+        c.ausn AS singleNo,
+        sum( amount_realpay ) AS amountRealpay
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        where order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        GROUP BY c.ausn
+        ) d on d.singleNo=c.ausn
+        <where>
+            and order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+            <if test="null!=searchMap.phone and ''!=searchMap.phone">
+                and c.mac=#{searchMap.phone}
+            </if>
+            <if test="null!=searchMap.singleNo and ''!=searchMap.singleNo">
+                and c.ausn=#{searchMap.singleNo}
+            </if>
+            <if test="null!=searchMap.agentNo and ''!=searchMap.agentNo">
+                and c.ausn like concat(#{searchMap.agentNo},'%')
+            </if>
+        </where>
+        GROUP BY b.agent_no
+        UNION ALL
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        '0' AS nums,
+        0 AS amountRealpay,
+        '0' AS money,
+        IFNULL(sum( a.amount_realpay ), 0 ) AS shopPercentage,
+        IFNULL( count( a.id ), 0 ) AS shopNums
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        <where>
+            and order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+            <if test="null!=searchMap.phone and ''!=searchMap.phone">
+                and c.mac=#{searchMap.phone}
+            </if>
+            <if test="null!=searchMap.singleNo and ''!=searchMap.singleNo">
+                and c.ausn=#{searchMap.singleNo}
+            </if>
+            <if test="null!=searchMap.agentNo and ''!=searchMap.agentNo">
+                and c.ausn like concat(#{searchMap.agentNo},'%')
+            </if>
+        </where>
+        GROUP BY
+        c.ausn
+    </select>
+
+    <select id="selectBusinessNameByUser" resultType="String" parameterType="Integer">
+        SELECT GROUP_CONCAT(b_name)
+        FROM dy_business_info a
+                 INNER JOIN
+             (SELECT oa.business_id
+              FROM dy_orders oa
+              WHERE oa.uid = #{uId}
+              GROUP BY oa.business_id
+              ORDER BY count(oa.business_id) desc
+              LIMIT 3) b on a.id = b.business_id
+    </select>
+
+
+    <select id="selectShopFinanceList" resultType="com.eningqu.domain.api.FinanceListResult" parameterType="Map">
+        SELECT
+        a.business_id uId,
+        b.`b_name` nickName,
+        b.`b_single_no` singleNo,
+        b.`b_phone` mobile,
+        COUNT(a.id) AS nums,
+        SUM(amount_realpay) AS amountRealpay,
+        COUNT(DISTINCT a.`uid`) sumUser
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b
+        ON a.business_id = b.id
+        WHERE order_status IN (3, 6)
+        and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        <if test="null!=searchMap.singleNo and ''!=searchMap.singleNo">
+            and b.b_single_no=#{searchMap.singleNo}
+        </if>
+        <if test="null!=searchMap.phone and ''!=searchMap.phone">
+            and b.b_phone=#{searchMap.phone}
+        </if>
+        <if test="null!=searchMap.agentNo and ''!=searchMap.agentNo">
+            and b_single_no like concat(#{searchMap.agentNo},'%')
+        </if>
+        GROUP BY a.`business_id`
+    </select>
+
+    <select id="selectCityFinanceList" resultType="com.eningqu.domain.api.FinanceListResult" parameterType="Map">
+        SELECT
+        syu.login_name singleNo,
+        syu.phone mobile,
+        ifnull(sum(nums),0) nums,
+        ifnull(sum(shopNums),0) shopNums,
+        ifnull(sum( dy.amountRealpay ),0) amountRealpay,
+        ifnull(sum( money ),0) money,
+        ifnull(sum( shopPercentage ),0) shopPercentage
+        FROM
+        (
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        count( a.id ) AS nums,
+        sum( amount_realpay ) AS amountRealpay,
+        sum( amount_payable - amount_realpay ) AS money,
+        d.amountRealpay AS shopPercentage,
+        IFNULL( d.shopNums, 0 ) shopNums
+        FROM
+        dy_orders a
+        INNER JOIN nq_user_info b ON a.uid = b.id
+        INNER JOIN dy_single_agent c ON b.agent_no = c.ausn
+        LEFT JOIN (
+        SELECT
+        count( a.id ) AS shopNums,
+        c.ausn AS singleNo,
+        sum( amount_realpay ) AS amountRealpay
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        WHERE order_status in( 3,6 ) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        GROUP BY c.ausn
+        ) d ON d.singleNo = c.ausn where order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and
+        #{searchMap.endDate}
+        GROUP BY b.agent_no
+        UNION ALL
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        '0' AS nums,
+        0 AS amountRealpay,
+        '0' AS money,
+        sum( a.amount_realpay ) AS shopPercentage,
+        IFNULL( count( a.id ), 0 ) AS shopNums
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        where order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        GROUP BY c.ausn
+        ) dy
+        LEFT JOIN sys_user syu ON syu.login_name LIKE CONCAT( LEFT ( dy.singleNo, 2 ), '%' )
+        <where>
+            <if test="null!=searchMap.singleNo and ''!=searchMap.singleNo">
+                and syu.login_name=#{searchMap.singleNo}
+            </if>
+            <if test="null!=searchMap.phone and ''!=searchMap.phone">
+                and syu.phone=#{searchMap.phone}
+            </if>
+        </where>
+        GROUP BY
+        syu.login_name
+    </select>
+
+    <select id="selectTeamFinanceList" resultType="com.eningqu.domain.api.FinanceListResult" parameterType="Map">
+        SELECT
+        ta.app_pkg singleNo,
+        ta.signature mobile,
+        ifnull(sum(nums),0) nums,
+        ifnull(sum(shopNums),0) shopNums,
+        ifnull(sum( dy.amountRealpay ),0) amountRealpay,
+        ifnull(sum( money ),0) money,
+        ifnull(sum( shopPercentage ),0) shopPercentage
+        FROM
+        (
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        count( a.id ) AS nums,
+        sum( amount_realpay ) AS amountRealpay,
+        sum( amount_payable - amount_realpay ) AS money,
+        d.amountRealpay AS shopPercentage,
+        IFNULL( d.shopNums, 0 ) shopNums
+        FROM
+        dy_orders a
+        INNER JOIN nq_user_info b ON a.uid = b.id
+        INNER JOIN dy_single_agent c ON b.agent_no = c.ausn
+        LEFT JOIN (
+        SELECT
+        count( a.id ) AS shopNums,
+        c.ausn AS singleNo,
+        sum( amount_realpay ) AS amountRealpay
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        WHERE order_status in( 3,6 ) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        GROUP BY
+        c.ausn
+        ) d ON d.singleNo = c.ausn where order_status in(3,6) and order_time BETWEEN #{searchMap.startDate} and
+        #{searchMap.endDate}
+        GROUP BY b.agent_no
+        UNION ALL
+        SELECT
+        c.ausn AS singleNo,
+        c.mac AS phone,
+        '0' AS nums,
+        0 AS amountRealpay,
+        '0' AS money,
+        sum( a.amount_realpay ) AS shopPercentage,
+        IFNULL( count( a.id ), 0 ) AS shopNums
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b ON a.business_id = b.id
+        INNER JOIN dy_single_agent c ON b.b_single_no = c.ausn
+        WHERE order_status in( 3,6 ) and order_time BETWEEN #{searchMap.startDate} and #{searchMap.endDate}
+        GROUP BY c.ausn
+        ) dy
+        LEFT JOIN dy_team_agent ta ON ta.app_pkg LIKE CONCAT( LEFT ( dy.singleNo, 4 ), '%' )
+        <where>
+            <if test="null!=searchMap.singleNo and ''!=searchMap.singleNo">
+                and ta.app_pkg=#{searchMap.singleNo}
+            </if>
+            <if test="null!=searchMap.agentNo and ''!=searchMap.agentNo">
+                and ta.app_pkg like concat(#{searchMap.agentNo},'%')
+            </if>
+            <if test="null!=searchMap.phone and ''!=searchMap.phone">
+                and ta.signature=#{searchMap.phone}
+            </if>
+        </where>
+        GROUP BY ta.app_pkg
+    </select>
+
+    <select id="selectShopActiveUser" resultType="Integer" parameterType="Integer">
+        SELECT a.`uid` AS uId
+        FROM dy_orders a
+        WHERE order_status IN (3, 6)
+          AND a.`business_id` = #{businessId}
+        GROUP BY a.`uid`
+    </select>
+
+
+    <select id="selectCityTotal" resultType="BigDecimal">
+        SELECT
+        IFNULL(sum(a.amount_realpay),0) amountRealpay
+        FROM
+        dy_orders a
+        INNER JOIN nq_user_info b ON a.uid = b.id
+        INNER JOIN dy_business_info c on c.id=a.business_id
+        <where>
+            order_time BETWEEN #{startDate} and #{endDate}
+            <if test="agentNo !=''">
+                and (b.agent_no LIKE concat(#{agentNo},'%') or c.b_single_no like concat(#{agentNo},'%'))
+            </if>
+            and a.order_status in( 3,6 )
+        </where>
+    </select>
+
+    <update id="updateOrderStatus">
+        update dy_orders
+        set order_status=2,
+        update_time=now()
+        where id in
+        <foreach collection="list" item="order" open="(" separator="," close=")">
+            #{order.id}
+        </foreach>
+    </update>
+
+    <update id="updateUserVipCredit">
+        <foreach collection="list" item="order" open="" close="" separator=";">
+            UPDATE nq_user_vip
+            set
+            vip_credit =(
+            vip_credit +(
+            SELECT
+            IFNULL(sum( a.vip_credit ),0 )
+            FROM
+            nq_user_vip_record a
+            INNER JOIN dy_orders_detail b ON a.vip_hongbao = b.id
+            WHERE
+            a.vip_status = 2 AND b.order_number = #{order.orderNumber}
+            and b.uid= #{order.uid}
+            )),
+            update_time=now()
+            WHERE uid = #{order.uid}
+        </foreach>
+    </update>
+
+    <insert id="insertUserCreditRecord">
+        INSERT INTO nq_user_vip_record (uid, vip_credit, vip_hongbao, create_time, vip_status, remarks)
+        SELECT a.uid,
+        a.vip_credit,
+        a.vip_hongbao,
+        now() AS create_time,
+        '1' AS vip_status,
+        '取消订单退还' AS remarks
+        FROM nq_user_vip_record a
+        INNER JOIN dy_orders_detail b ON a.vip_hongbao = b.id
+        WHERE a.vip_status = 2
+        AND b.order_number in
+        <foreach collection="list" item="order" separator="," open="(" close=")">
+            #{order.orderNumber}
+        </foreach>
+    </insert>
+
+    <select id="selectExcelList" resultType="com.eningqu.modules.system.vo.OrderExcelVo">
+        select
+        a.order_number orderNumber,
+        a.order_status orderStatus,
+        a.amount_payable payMoney,
+        a.amount_realpay money,
+        a.pay_way payWay,
+        a.order_time orderTime,
+        a.pay_time payTime,
+        a.sign_name name,
+        a.sign_phone phone,
+        a.sign_address address,
+        a.exp_no expNo
+        from dy_orders a
+        <where>
+            <if test="param.orderNumber !='' ">
+                a.order_number=#{param.orderNumber}
+            </if>
+            <if test="param.status != ''">
+                a.order_status=#{param.status}
+            </if>
+            <if test="param.payTimeStart !='' and param.payTimeEnd != ''">
+                a.pay_time BETWEEN #{param.payTimeStart} and #{param.payTimeEnd}
+            </if>
+        </where>
+    </select>
+
+</mapper>

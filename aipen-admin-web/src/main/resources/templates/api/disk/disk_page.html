@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <input class="layui-hide id" name="id" value="" />
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">总容量</label>
+        <div class="layui-input-block">
+            <input type="number" name="totalSize" class="layui-input totalSize" lay-verify="required|number" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">已用容量</label>
+        <div class="layui-input-block">
+            <input type="number" name="usedSize" class="layui-input usedSize" lay-verify="required|number" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label">未用容量</label>
+        <div class="layui-input-block">
+            <input type="number" class="layui-input unUsedSize" lay-verify="required|number" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="save">立即保存</button>
+            <button id="close" type="button" class="layui-btn layui-btn-sm layui-btn-primary">关闭</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
+<script type="text/javascript" th:src="@{/js/api/disk-page.js}" ></script>
+</body>
+</html>

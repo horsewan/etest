@@ -1,0 +1,13 @@
+CREATE TABLE dy_constant (
+  id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  constant_code varchar(30) CHARACTER SET utf8mb4 NOT NULL COMMENT '常量编码',
+  constant_name varchar(100) CHARACTER SET utf8mb4 NOT NULL COMMENT '常量名称',
+  module varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '模块名称',
+  create_id bigint(20) DEFAULT NULL COMMENT '创建者',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  update_id bigint(20) DEFAULT NULL COMMENT '更新者',
+  update_time datetime DEFAULT NULL COMMENT '更新时间',
+  url varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'url链接',
+  remarks varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '常量说明',
+  PRIMARY KEY (id) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='常量设置表';

@@ -1,0 +1,2 @@
+ALTER TABLE futruedao_platform.nq_user_info DROP KEY index_mobile;
+ALTER TABLE futruedao_platform.nq_user_info ADD CONSTRAINT unique_mobile PRIMARY KEY (mobile);

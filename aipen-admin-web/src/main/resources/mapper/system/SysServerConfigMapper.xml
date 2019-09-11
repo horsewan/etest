@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysServerConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.eningqu.domain.system.SysServerConfig">
+    <result column="id" property="id" />
+        <result column="domain" property="domain" />
+        <result column="version" property="version" />
+        <result column="priority" property="priority" />
+        <result column="avaliable" property="avaliable" />
+        <result column="area" property="area" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+    </resultMap>
+    
+    <select id="selectOptimalRecords" resultMap="BaseResultMap">
+    	SELECT domain,type,version FROM sys_server_config
+		WHERE status= 1 AND avaliable = 1 AND priority = (
+		SELECT b.priority FROM sys_server_config b ORDER BY b.priority LIMIT 1)
+    </select>
+    
+    <select id="selectByUniqueKey" resultType="java.lang.Integer">
+    	SELECT count(1) FROM sys_server_config
+    	WHERE domain = #{domain,jdbcType=VARCHAR} and version = #{version,jdbcType=INTEGER}
+    	and type = #{type,jdbcType=INTEGER}
+    	limit 1
+    </select>
+	<select id="selectRepeatedRecord" resultType="java.lang.Integer">
+		SELECT  IFNULL(SUM(CASE domain    
+						WHEN '' THEN 0
+			            WHEN #{domain,jdbcType=VARCHAR} THEN 0      
+			            ELSE 1     
+			        	END),0) 
+				 FROM sys_server_config
+				WHERE priority = #{priority,jdbcType=INTEGER}
+	</select>   
+	<select id="selectVersionAvaliable" resultType="java.lang.Integer">
+		select count(1) from sys_server_config
+		where domain = #{domain,jdbcType=VARCHAR} and avaliable = #{avaliable,jdbcType=INTEGER}
+		and type = #{type,jdbcType=INTEGER}
+	</select> 
+    <update id="updatePriorityByDomain">
+    	update sys_server_config
+    	set priority = #{priority,jdbcType=INTEGER}
+    	where domain = #{domain,jdbcType=VARCHAR}
+    </update>
+    <update id="updateAvaliableByDomain">
+    	update sys_server_config
+    	set avaliable = #{avaliable,jdbcType=INTEGER}
+    	where domain = #{domain,jdbcType=VARCHAR}
+    	and type = #{type,jdbcType=INTEGER}
+    </update>
+    
+</mapper>

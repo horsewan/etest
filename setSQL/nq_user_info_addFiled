@@ -1,0 +1,2 @@
+
+ALTER TABLE nq_user_info add agent_level char(1) DEFAULT 2 COMMENT '私人特助层级(0:admin,1:市代,2:团代,3:个代)' AFTER agent_no;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+    <head>
+        <meta charset="utf-8">
+        <title>操作日志</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+        <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+    </head>
+    <body class="childrenBody">
+    <blockquote class="layui-elem-quote">
+        <form class="layui-form">
+            <div shiro:hasPermission="sys:dict:add" class="layui-inline" id="addGroup">
+                <button type="button" class="layui-btn layui-btn-normal">
+                    <i class="layui-icon">&#xe608;</i> 添加字典组
+                </button>
+            </div>
+        </form>
+    </blockquote>
+    <table id="dictTableList" lay-filter="dictTableList"></table>
+    <div>
+        <script type="text/javascript">
+            var auth_add = 'layui-hide';
+            var auth_edit = 'layui-hide';
+            var auth_delete = 'layui-hide';
+        </script>
+    </div>
+    <div shiro:hasPermission="sys:dict:add">
+        <script type="text/javascript">
+            auth_add = '';
+        </script>
+    </div>
+    <div shiro:hasPermission="sys:dict:edit">
+        <script type="text/javascript">
+            auth_edit = '';
+        </script>
+    </div>
+    <div shiro:hasPermission="sys:dict:delete">
+        <script type="text/javascript">
+            auth_delete = '';
+        </script>
+    </div>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sys/dict-list.js}" ></script>
+</body>
+</html>

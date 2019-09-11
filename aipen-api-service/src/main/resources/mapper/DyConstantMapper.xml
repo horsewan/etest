@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.DyConstantMapper">
+  <resultMap id="BaseResultMap" type="com.eningqu.domain.api.DyConstant">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="constant_code" jdbcType="VARCHAR" property="constantCode" />
+    <result column="constant_name" jdbcType="VARCHAR" property="constantName" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, constant_code, constant_name, `module`, create_id, create_time, update_id, update_time, 
+    url, remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dy_constant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dy_constant
+    where constant_code = #{code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dy_constant
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dy_constant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertDyConstant" parameterType="com.eningqu.domain.api.DyConstant">
+    insert into dy_constant (id, constant_code, constant_name, 
+      `module`, create_id, create_time, 
+      update_id, update_time, url, 
+      remarks)
+    values (#{id,jdbcType=BIGINT}, #{constantCode,jdbcType=VARCHAR}, #{constantName,jdbcType=VARCHAR}, 
+      #{module,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, now(),
+      #{updateId,jdbcType=BIGINT}, now(), #{url,jdbcType=VARCHAR},
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eningqu.domain.api.DyConstant">
+    insert into dy_constant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="constantCode != null">
+        constant_code,
+      </if>
+      <if test="constantName != null">
+        constant_name,
+      </if>
+      <if test="module != null">
+        `module`,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="constantCode != null">
+        #{constantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="constantName != null">
+        #{constantName,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eningqu.domain.api.DyConstant">
+    update dy_constant
+    <set>
+      <if test="constantCode != null">
+        constant_code = #{constantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="constantName != null">
+        constant_name = #{constantName,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        `module` = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = now(),
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.eningqu.domain.api.DyConstant">
+    update dy_constant
+    set constant_code = #{constantCode,jdbcType=VARCHAR},
+      constant_name = #{constantName,jdbcType=VARCHAR},
+      `module` = #{module,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_time =now(),
+      url = #{url,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

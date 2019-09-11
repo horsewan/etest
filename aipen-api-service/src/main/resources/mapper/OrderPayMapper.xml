@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.OrderPayMapper">
+
+    <select id="selectByWhere" resultType="com.eningqu.domain.api.OrderPay">
+        SELECT id, order_number, appid, partnerid, package_pay, noncestr, timestamp, prepayid, sign FROM dy_orders_pay where order_number=#{orderNumber}  ORDER BY ID DESC LIMIT 1;
+    </select>
+    
+</mapper>

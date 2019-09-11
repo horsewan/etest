@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.OrdersMapper">
+
+
+    <!--根据用户ID和订单号查询订单记录-->
+    <select id="selectOrderByOrderNumberForUid" resultType="com.eningqu.domain.api.Orders">
+      SELECT id,business_id, order_number, order_status, amount_payable FROM dy_orders WHERE uid = #{uid} AND order_number = #{orderNumber}
+    </select>
+
+    <!--根据订单号查询订单记录-->
+    <select id="selectOrderByOrderNumber" resultType="com.eningqu.domain.api.Orders">
+        SELECT id,business_id, order_number, order_status, amount_payable FROM dy_orders WHERE order_number = #{orderNumber}
+    </select>
+
+    <select id="queryOrderByNumber" resultType="com.eningqu.domain.api.Orders">
+        SELECT id, uid, business_id, order_number, order_status, serial_number, exp_company, exp_code, exp_no, sign_name, sign_phone, sign_address, order_time, pay_way, pay_time, amount_payable, amount_realpay, update_name, update_time, remarks FROM dy_orders WHERE order_number = #{orderNumber}
+    </select>
+
+    <!--更新成功支付的订单信息 订单初始状态为【待支付】-->
+    <update id="updatePayNotifyOrder">
+      UPDATE dy_orders
+      SET
+        order_status = #{order.orderStatus},
+        amount_realpay = #{order.amountRealpay},
+        pay_time = #{order.payTime},
+        pay_way = #{order.payWay},
+        serial_number =  #{order.serialNumber}
+      WHERE
+        id = #{order.id} AND order_number = #{order.orderNumber} AND order_status = #{originalOrderStatus}
+    </update>
+</mapper>

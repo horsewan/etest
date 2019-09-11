@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="OFF" monitorInterval="30">
+
+    <Properties>
+        <property name="log_home">/app/admin/logs</property>
+        <property name="console_log_pattern">%highlight{%date{yyyy-MM-dd HH:mm:ss} | %level{5} | %t | %c{36}:%M ---> %msg%xEx%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=black}</property>
+        <property name="file_log_pattern">%date{yyyy-MM-dd HH:mm:ss} | %level{5} | %t | %c{36}:%M ---> %msg%xEx%n</property>
+        <property name="file_size">10 MB</property><!-- 日志切割的最小单位 -->
+        <property name="output_log_level">info</property><!-- 日志输出级别 -->
+        <property name="project_name">aipen-admin-web</property><!-- 项目名称 -->
+    </Properties>
+
+
+    <appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="${output_log_level}"/>
+            <PatternLayout pattern="${console_log_pattern}"/>
+        </Console>
+
+        <RollingFile name="ErrorRollingFile" fileName="${log_home}/${project_name}-error.log"
+                     filePattern="${log_home}/${date:yyyy-MM}/${project_name}-error-%d{yyyy-MM-dd}-%i.log.gz" append="false">
+            <PatternLayout charset="UTF-8" pattern="${file_log_pattern}"/>
+
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="${file_size}" />
+            </Policies>
+
+            <DefaultRolloverStrategy max="20"/>
+
+        </RollingFile>
+
+        <RollingFile name="InfoRollingFile" fileName="${log_home}/${project_name}-info.log"
+                     filePattern="${log_home}/${date:yyyy-MM}/${project_name}-info-%d{yyyy-MM-dd}-%i.log.gz" append="false">
+            <PatternLayout charset="UTF-8" pattern="${file_log_pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="${file_size}" />
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="info"></logger>
+        <logger name="org.mybatis" level="info"></logger>
+        <logger name="com.ue.springboot.mapper" level="info" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.thymeleaf" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.zaxxer.hikari" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.mysql" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.baomidou.mybatisplus" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.hibernate" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.shiro" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.crazycake.shiro" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <root level="${output_log_level}">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="ErrorRollingFile"/>
+            <appender-ref ref="InfoRollingFile"/>
+        </root>
+
+    </loggers>
+</configuration>

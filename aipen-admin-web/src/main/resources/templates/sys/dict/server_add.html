@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" action="/sys/user/add">
+    <input class="layui-hide id" name="id" value="" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">主机记录<i style="color: red">*</i></label>
+        <div class="layui-input-block">
+            <input type="text" name="domain" class="layui-input groupDesc" lay-verify="required" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+                <label class="layui-form-label">语音类型</label>
+                <div class="layui-input-block type">
+                    <input type="radio" name="type" value="1" title="ASR" checked="checked">
+                    <input type="radio" name="type" value="2" title="TTS">
+                    <input type="radio" name="type" value="3" title="NMT">
+                </div>
+            </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版本<i style="color: red">*</i></label>
+        <div class="layui-input-block">
+            <input type="text" name="version" class="layui-input groupCode" lay-verify="required" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">权重值<i style="color: red">*</i></label>
+        <div class="layui-input-block">
+            <input type="text" name="priority" class="layui-input groupCode" lay-verify="required" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+                <label class="layui-form-label">最优版本</label>
+                <div class="layui-input-block avaliable">
+                    <input type="radio" name="avaliable" value="2" title="否" checked="checked">
+                    <input type="radio" name="avaliable" value="1" title="是">
+                </div>
+            </div>
+            
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-sm" lay-submit lay-filter="save">立即保存</button>
+            <button id="close" type="button" class="layui-btn layui-btn-sm layui-btn-primary">关闭</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
+<script type="text/javascript" th:src="@{/js/sys/server-add.js}" ></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.system.mapper.SysDictMapper">
+
+    <resultMap id="dictVOMap" type="com.eningqu.modules.system.vo.DictVO">
+        <id property="id" column="id"></id>
+        <result property="labelName" column="label_name"></result>
+        <result property="valueCode" column="value_code"></result>
+    </resultMap>
+
+    <select id="queryDicts" resultMap="dictVOMap">
+      SELECT id, label_name, value_code FROM sys_dict WHERE group_code = #{groupCode} AND del_status = #{delStatus}
+    </select>
+
+    <!--检测字典组码是否存在-->
+    <select id="checkGroup" resultType="java.lang.Integer">
+        SELECT count(*) FROM sys_dict WHERE group_code = #{groupCode} AND pid = #{pid}
+    </select>
+    <!--检查字典码是否存在-->
+    <select id="checkDict" resultType="java.lang.Integer">
+        SELECT count(*) FROM sys_dict WHERE group_code = #{groupCode} AND value_code = #{valueCode}
+    </select>
+</mapper>

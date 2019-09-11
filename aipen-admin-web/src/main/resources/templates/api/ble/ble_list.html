@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>客服信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all"/>
+    <style>
+        #pkg tbody .layui-table-cell {
+            height: 60px;
+            line-height: 60px;
+        }
+
+        #device tbody .layui-table-cell {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .noScroll {
+            overflow: hidden !important;
+        }
+
+        .layui-table-click {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body class="childrenBody">
+<div class="layui-fluid" style="padding: 0px;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8" id="pkg">
+            <blockquote class="layui-elem-quote" style="padding: 10px 15px;margin-bottom: 0;">
+                <span>客服经理列表</span>
+                <!--<button class="layui-btn layui-btn-xs" style="float: right" id="addPkg">
+                    <i class="layui-icon">&#xe608;</i> 添加客户
+                </button>-->
+            </blockquote>
+            <!--查询-->
+            <blockquote class="layui-elem-quote quoteBox" style="padding: 0px 15px 10px 15px;">
+                <form class="layui-form">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" id="appPkg" class="layui-input searchVal" placeholder="客服经理编号"/>
+                        </div>
+                        <div class="layui-input-inline" >
+                            <input type="text" id="phone" class="layui-input searchVal" placeholder="手机号"/>
+                        </div>
+                        <button type="button" class="layui-btn" id="pkg_search">
+                            <i class="layui-icon">&#xe615;</i> 查询
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="pkg_add" shiro:hasPermission="nq:ble:add">
+                        <button type="button" class="layui-btn  layui-btn-normal">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="pkg_del" shiro:hasPermission="nq:ble:delete">
+                        <button type="button" class="layui-btn  layui-btn-danger">
+                            <i class="layui-icon">&#xe640;</i> 删除
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="asr_config" shiro:hasPermission="nq:ble:speech">
+                        <button type="button" class="layui-btn  layui-bg-cyan">
+                            <i class="layui-icon">&#xe620;</i> ASR配置
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="nmt_config" shiro:hasPermission="nq:ble:speech">
+                        <button type="button" class="layui-btn  layui-bg-cyan">
+                            <i class="layui-icon">&#xe620;</i> NMT配置
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="tts_config" shiro:hasPermission="nq:ble:speech">
+                        <button type="button" class="layui-btn  layui-bg-cyan">
+                            <i class="layui-icon">&#xe620;</i> TTS配置
+                        </button>
+                    </div>
+                    <div class="layui-inline" id="server_config" shiro:hasPermission="nq:ble:server">
+                        <button type="button" class="layui-btn  layui-bg-cyan">
+                            <i class="layui-icon">&#xe620;</i> 服务器配置
+                        </button>
+                    </div>
+                </form>
+            </blockquote>
+            <table id="pkgTableList" lay-filter="pkgTableList"></table>
+        </div>
+        <div class="layui-col-md4" id="device">
+            <blockquote class="layui-elem-quote" style="padding: 10px 15px;margin-bottom: 0;">客服列表</blockquote>
+            <!--查询-->
+            <blockquote class="layui-elem-quote quoteBox" style="padding: 0px 15px 10px 15px;">
+                <form class="layui-form">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" id="agentNo" class="layui-input searchVal" placeholder="客服编号"/>
+                        </div>
+                        <div class="layui-input-inline">
+                            <input type="text" id="mac" class="layui-input searchVal" placeholder="手机号"/>
+                        </div>
+                        <button type="button" class="layui-btn" id="device_search">
+                            <i class="layui-icon">&#xe615;</i> 查询
+                        </button>
+                    </div>
+                </form>
+            </blockquote>
+            <table id="bleTableList" lay-filter="bleTableList"></table>
+        </div>
+    </div>
+</div>
+<div>
+    <script type="text/javascript">
+        var auth_list = 'layui-hide';
+        var auth_add = 'layui-hide';
+        var auth_edit = 'layui-hide';
+        var auth_delete = 'layui-hide';
+        var auth_check_device = 'disabled';
+        var auth_status = 'disabled';
+        var auth_engine_switch = 'disabled';
+        var auth_enable_status = 'disabled';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:list">
+    <script type="text/javascript">
+        auth_list = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:add">
+    <script type="text/javascript">
+        auth_add = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:edit">
+    <script type="text/javascript">
+        auth_edit = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:delete">
+    <script type="text/javascript">
+        auth_delete = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:status">
+    <script type="text/javascript">
+        auth_status = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:checkdevice">
+    <script type="text/javascript">
+        auth_check_device = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:engineswitch">
+    <script type="text/javascript">
+        auth_engine_switch = '';
+    </script>
+</div>
+<div shiro:hasPermission="nq:ble:enablestatus">
+    <script type="text/javascript">
+        auth_enable_status = '';
+    </script>
+</div>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/api/ble-list.js}"></script>
+</body>
+</html>

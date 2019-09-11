@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>使用指南</title>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .ring li {
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 20px;
+            padding: 10px;
+            list-style: none;
+        }
+
+        .ring li:hover {
+            cursor: pointer;
+        }
+
+        .ring li:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: -6px;
+            top: -6px;
+            border-radius: 50%;
+            border: 6px dashed rgb(204, 204, 204);
+        }
+
+        .ring li > div {
+            height: 100%;
+            background: rgb(158, 234, 106);
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            text-align: center;
+            line-height: 80px;
+            font-size: 16px;
+            color: rgb(255, 255, 255);
+        }
+
+        @-webkit-keyframes circle{
+            0%{ transform:rotate(0deg); }
+            100%{ transform:rotate(-360deg); }
+        }
+
+        .ring li:hover:before {
+            -webkit-animation: circle 4s infinite linear;
+        }
+
+        .ring li:first-child:before {
+            -webkit-animation: circle 4s infinite linear;
+        }
+
+        .ring li:hover:before {
+            border-color: rgba(204, 204, 204, .8);
+        }
+
+        .ring li:active:before {
+            border-color: orange;
+        }
+
+        .ring li:hover > div {
+            background: rgba(158, 234, 106, .8);
+        }
+
+        .ring li:active > div {
+            background: rgba(0, 0, 255, .5);
+        }
+
+        .ring li:last-child,
+        .ring li:last-child > div,
+        .ring li:last-child:before {
+            border-radius: 0;
+        }
+
+        .ripple {
+            position: relative;
+        //隐藏溢出的径向渐变背景
+        overflow: hidden;
+        }
+
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        //设置径向渐变
+        background-image: radial-gradient(circle, #666 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .3s, opacity .5s;
+        }
+
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body>
+<div class="container ring">
+    <p>圆环旋转</p>
+    <ul>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div>登录</div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+    </ul>
+</div>
+<div class="container text-center">
+    <button class="btn btn-default ripple btn-lg">Button</button>
+    <button class="btn btn-default ripple btn-lg">Button with very long content</button>
+</div>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer, $ = layui.jquery;
+    });
+</script>
+</body>
+</html>

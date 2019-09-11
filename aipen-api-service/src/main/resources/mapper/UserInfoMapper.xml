@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.UserInfoMapper">
+
+    <!--根据手机号查询-->
+    <select id="selectByMobile" resultType="com.eningqu.domain.api.UserInfo">
+      SELECT id,real_name, nick_name, head_img, sex, mobile, credential,address_x,address_y,address_d,remarks,agent_no FROM nq_user_info WHERE mobile = #{mobile} AND del_status = 'Y'
+    </select>
+    <!--检查手机号是否被绑定-->
+    <select id="checkMobile" resultType="java.lang.Integer">
+        SELECT count(mobile) FROM nq_user_info WHERE mobile = #{mobile}
+    </select>
+
+    <select id="selectByuserQrVal" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT id, real_name,mobile,nick_name, head_img, sex, mobile, credential,address_x,address_y,address_d,remarks,agent_no FROM nq_user_info WHERE credential = #{userQrVal}
+    </select>
+</mapper>

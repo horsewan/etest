@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.ProductMapper">
+
+    <!--更新产品状态-->
+    <update id="updateStatus">
+        UPDATE dy_product SET status = #{status} WHERE id = #{id}
+    </update>
+
+    <!--查询产品详情-->
+    <select id="selectDetail" resultType="java.lang.String">
+        SELECT product_detail FROM dy_product WHERE id = #{id}
+    </select>
+
+    <!--保存产品详情-->
+    <update id="saveDetail">
+        UPDATE dy_product SET product_detail = #{html} WHERE id = #{id}
+    </update>
+
+</mapper>

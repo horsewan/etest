@@ -1,0 +1,136 @@
+server:
+  port: 80
+
+logging:
+  config: classpath:log4j2-prod.xml
+
+spring:
+
+  #数据源配置
+  datasource:
+
+    # 主数据库
+    master:
+      url: jdbc:mysql://eningqu-platform-hk-inner.mysql.rds.aliyuncs.com:3306/eningqu_platform?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: eningqu_platform
+      password: 1234ASDF$#@!
+
+    # 从数据库
+    slave:
+      url: jdbc:mysql://eningqu-platform-hk-inner.mysql.rds.aliyuncs.com:3306/eningqu_platform?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: eningqu_platform
+      password: 1234ASDF$#@!
+
+    # 第三数据库
+    third:
+      url: jdbc:mysql://192.168.1.200:3306/futruedao_platform200?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: clientuser
+      password: Abc^%$321
+
+    # 第四数据库
+    fourth:
+      url: jdbc:mysql://192.168.1.200:3306/futruedao_platform200?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: clientuser
+      password: Abc^%$321
+
+
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    # 初始化大小，最小，最大
+    initialSize: 10
+    minIdle: 10
+    maxActive: 200
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 100
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
+
+  #Redis配置
+  redis:
+    # 数据库索引（默认为0）
+    database: 0
+    # 服务器地址
+    host: eningqu-platform-hk-inner.redis.rds.aliyuncs.com
+    # 服务器连接端口
+    port: 6379
+    # 服务器连接密码（默认为空）
+    password: 1234ASDF$#@!
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 200
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+    # 连接超时时间（毫秒）
+    timeout: 10000
+
+# mybatis 禁止
+mybatis-plus:
+  global-config:
+    refresh-mapper: false
+
+# 微信支付
+wx:
+  # 商户号
+  mch_id: 1504502471
+  # 商户号秘钥
+  mch_key: C81EE801D610F06CDC88DFA34CC7DDEE
+  # 商户证书路径
+  mch_cert_path: /ssl/wx/apiclient_cert.p12
+  # app应用
+  app:
+    # AiPen移动应用appid
+    app_id: wxe4621d13435d4127
+    # 支付回调通知URL
+    pay_notify_url: https://api.eningqu.com/api/wx/pay/notify
+    # 退款回调通知URL
+    refund_notify_url: https://api.eningqu.com/api/wx/refund/notify
+
+  # 网站应用
+  qr:
+    app_id: wxe264fb311833d372
+    app_secret: bf7126283e1e21da1bcbaea6b0828f76
+
+# 支付宝支付
+ali:
+  # 商户账号
+  seller_email: fbcqjp8881@sandbox.com
+  # 商户ID
+  seller_id: 2088102175939634
+  # 应用appID
+  app_id: 2016091600527295
+  # 签名类型
+  sign_type: RSA2
+  # app应用私钥
+  app_private_key: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCKnyfdPDxiUnlefufwv+igWdxFTM6+BDSRxo8eFyi6Ow0rtx28mUqsLAQbf+oQ/ZqS0rMx9cOHqy+7NrL4CVbo/13tvtHR40G+ZVJxIZ49dXNJ8rDDCLz3eF+erxuRL0i7/EvyLA+TzMpXPcblBtgqwhsc+OBaAH085CXJ31AwYsCNEwC4ZS9t17/6439Ae8jx29gudQlY8BUlgQUOJynu9vEMwswKJlnFVC7E5TcvLwL+GUV6nYp2nsAzSW3f8dTdkhL0TdpZxhZqHY/UzEEo0hyW53sq56MbaDOB1PavBWUAmXRC2GFBxD6WX3D67DU2x1TGgEMHUDVpVJky1nm1AgMBAAECggEACnhW9HjWPr7n9+Ex95cnJOVko79XZja/Gbubl7Q8GUTYi9K65kHVyAdTEBirPzlIcYqEimN7r0WYx1UsU1uxOsv+9jQReP7nOlBA19aoMxAp8w3nl/OTAkYPQtcLB/5ASiKWQeZeDtXK+qfp2+aWcTRUA+4wU9vxmaXJzOOXFPBizqFTEu+wvTe3411ojtIOUdQVzOqJhUFLeuseuCX0Sv5tqXXOVuGRf7jvMwrEFWcvQ6NCyYc6UltuWTMxhI4oYvc8YOTEoSTEINRa3bftGe3tAChoQObUTGO231KBw0MywbfBUDT/vs/vFTrMtOJUKW8PcRTQzcs5gCDGrqUNCQKBgQD9dhbudMp8LUjSx3gRYovE0oxGfo0iD6VAG7fjMI//Cj5aQnKcUoKDIyOtSYcPmd68H6LjQaxquDHYyIg90KAr/anvEWh0cOYIUumi6aZyvHoqRxUwyQfsmDayQuiqmJX2z6WRaOGpslkbtC5e2lw4YLdlMkSXNJwNPtax3D4NlwKBgQCMApntbY8h4UWI0EMye9mdhXumvGdqWS3VIXDr6SPrO3cUx3HQG8Tq8YBPNsroyjTVDHasCKMka3vdjuB9wITPmrqPPpVC2ZkjAVprNUTlzo2Uswus4zbYlTC3L1YoairaO5R3YpWYOrjsn7CBVeGLEhgqUon6F2H2jQzpVV40kwKBgQDDWlEyWTH3o6+NRdB1Fc9EVENp0gBVUFm9n5+Lq9JQcES+rJhJhA6zpFHLLfC7RY020etp3SRW3MEOpQDdI/9P6KMhb/liReIGaGFK/2sa48oE6+SZRVimMmt12bwaQKDVKhYijQPhF2U2xRk4YnTRvzma9bOIFzRvwQ8Y5ves4QKBgQCAXN4s/NZOVI+AqJgDD+Nq9Pdx3afeq9ZGYft6fmws/X7msRhamSsHz9Q4S97qYIDhlySyAtU3zcdpUNXm1Puurog+Tj1gZclte48fXV5GZwINA74/iq09EkLwn9iZAwU4wYkTj3HheG0UnC+h1FANRdCb9MKFZKyu85CT2G2fOwKBgQC34z0FLIo/09CslVtqhytaRQefoY5utUyDFkjiAd39uKgUhrGjoc+7CEbelbUN+wynhB6BrgQakEVoTRKuGaBQqNkGzRW2KMGx0m+SHjMwE+fAFdo8hQJzaDJbywx/PAuMyvoHMGOreEi30nfM4SxnGxkHHpQaga9Gcf9qJZ7y+w==
+  # 支付宝公钥
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApmyTGVHaYwTcGNliMuumRFmzALXYykU87DxACqM9vmrSCoI2t13jWf0QMuZdj6y2DsN0IqDnCZMZ54zI47ev6DaF0hBR245xRoR0Tt+8PKP7zCFHgGo/3rL4zwoDsoQuf5emoCvszYd66aaVBoygGtvR6G9k4R4abFkl5SPWCugE+l58QhDCv9f8bKYj5HcqtJUruquLtXCjPgySD7J6GjlBN7b/fO1DRA6kNnsEQpCcfSor+ZWwVEJDSfiCalfO0V+KvRJGYQvwANgG1RxRRahCjK1Gnp9/qhSn4GgcKBeuLH/3bPytRACXnigaMwHssmnJTwNa0PpBHxKhnEV10QIDAQAB
+  # 支付回调通知URL
+  notify_url: https://api.eningqu.com/api/ali/pay/notify
+
+# 文件上传临时路径
+file:
+  upload-root: /app/api/files/upload/tmp/
+
+#授权文件根目录
+auth:
+  path: /app/api/files/audio/

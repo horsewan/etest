@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.UserMapper">
+
+
+    <delete id="deleteOauthUser">
+        DELETE
+        from nq_user_info
+        WHERE id = #{uid}
+    </delete>
+
+    <select id="getUserInfoByPhone" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT id, mobile
+        FROM nq_user_info
+        WHERE mobile = #{mobile}
+    </select>
+
+    <update id="updateDelStatus">
+        UPDATE nq_user_info
+        SET del_status = #{sta}
+        WHERE id = #{uid}
+    </update>
+
+    <update id="updateAgentNoByPhone">
+        UPDATE nq_user_info
+        SET agent_no   = #{agentNo},
+            agent_level=#{level}
+        WHERE mobile = #{mobile}
+    </update>
+
+    <update id="updateSysUser">
+        UPDATE sys_user
+        set phone="",
+            name=""
+        where id = #{id}
+    </update>
+
+    <select id="selectByAgentNoIsDefault" resultType="com.eningqu.domain.api.UserInfo">
+        select id,
+               real_name,
+               nick_name,
+               agent_no,
+               mobile,
+               address_x,
+               address_y,
+               address_d
+        from nq_user_info
+        where agent_no = 'A00000'
+          AND agent_level = 3
+          AND address_y IS NOT NULL
+          AND address_x IS NOT NULL
+    </select>
+    <select id="selectUnGetProductUser" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT a.id,
+               a.mobile,
+               a.nick_name
+        FROM nq_user_info a
+        WHERE NOT EXISTS(
+                SELECT uid
+                FROM nq_user_vip_record b
+                WHERE a.id = b.uid
+                  AND vip_status = 1
+                  AND date(b.create_time) = curdate()
+                GROUP BY b.uid
+               <![CDATA[ HAVING count(uid) >= 10)]]>
+          and a.del_status = 'Y'
+    </select>
+
+    <select id="selectAllUserMoneyTotal" resultType="java.math.BigDecimal">
+        SELECT
+           ifnull(sum( vip_credit ),0) moneyTotal
+        FROM
+            nq_user_vip_record a
+        LEFT JOIN nq_user_info b ON a.uid = b.id
+        WHERE
+         a.vip_status =1
+        <if test="agentNo !=''">
+            and b.agent_no LIKE concat(#{agentNo},'%')
+        </if>
+    </select>
+
+    <select id="selectCityNums"  resultType="com.eningqu.modules.system.vo.CityGroupVo" >
+        SELECT
+            b.setting_code settingCode,
+            b.setting_value city,
+            count( user_id ) nums
+        FROM
+            dy_user_setting b
+        WHERE
+            b.module = "City"
+        GROUP BY
+            b.setting_code,
+            b.setting_value
+        ORDER BY
+            nums DESC
+    </select>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.ProductMapper">
+
+    <!--更新库存量-->
+    <update id="updateStockQuantity">
+        UPDATE dy_product SET sold_quantity = sold_quantity + #{nums}, stock_quantity = sold_quantity - #{nums} WHERE stock_quantity >= #{nums} AND id = #{id}
+    </update>
+
+</mapper>

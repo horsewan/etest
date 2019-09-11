@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.BusinessMapper">
+
+    <select id="selectByTicketAndSingleNo" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id, b_name, b_ticket, b_single_no, b_person, b_phone, b_type, b_address, b_sole_price, b_price, b_sign, b_cdn_qr, create_time, update_time, remarks, address_x, address_y
+        FROM
+        dy_business_info
+        WHERE
+        b_ticket = #{ticket}
+          AND
+        b_single_no = #{singleNo}
+    </select>
+
+    <select id="selectByPhone" resultType="com.eningqu.domain.api.BusinessInfo">
+        SELECT
+        id,b_sign
+        FROM
+        dy_business_info
+        WHERE
+        b_phone = #{phone}
+    </select>
+
+    <select id="selectBusinessByPhone" resultType="com.eningqu.domain.api.BusinessFinanceResult">
+        SELECT
+        a.business_id uId,
+        b.`b_name` nickName,
+        b.`b_single_no` singleNo,
+        COUNT(a.id) AS nums,
+        SUM(amount_realpay) AS amountRealpay,
+        COUNT(DISTINCT a.`uid`) sumUser
+        FROM
+        dy_orders a
+        INNER JOIN dy_business_info b
+        ON a.business_id = b.id
+        WHERE order_status IN (3, 6)
+        and  date(order_time) = curdate()
+        and b.b_phone=#{phone}
+        GROUP BY a.`business_id`
+    </select>
+
+    <select id="selectUserBalanceList" resultType="com.eningqu.domain.api.BalanceResult">
+        SELECT
+            a.id as id,
+            order_number as  orderNo,
+            pay_time payTime ,
+            pay_way payWay,
+            amount_realpay money
+        FROM
+            dy_orders a
+                INNER JOIN dy_business_info b on a.business_id=b.id
+        WHERE
+            b.b_phone = #{phone}
+          AND order_status  IN (3, 6) and  date(order_time) = curdate()
+          and pay_way is not null
+    </select>
+</mapper>

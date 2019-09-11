@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.8.17.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>dyIMinteface</groupId>
+            <artifactId>dyIMinteface</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/dyIM-1.0-inteface.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>dyIMjavaclient</groupId>
+            <artifactId>dyjavaclient</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/dyIM-1.0-javaclient.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>dyIMjavaEvent</groupId>
+            <artifactId>dyjavaevent</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/swing-worker-1.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
+        </dependency>
+    </dependencies>
+    <parent>
+        <artifactId>aipen</artifactId>
+        <groupId>com.eningqu</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <!-- IM -->
+
+
+    <groupId>com.eningqu</groupId>
+    <artifactId>aipen-common</artifactId>
+    <name>aipen-common</name>
+
+</project>

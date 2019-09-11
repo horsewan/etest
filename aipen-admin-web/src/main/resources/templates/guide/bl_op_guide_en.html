@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Guide</title>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <style>
+
+        *{
+            font-family: "Microsoft YaHei";
+        }
+
+        .lay-guide .lay-guide-title {
+            position: relative;
+            height: 55px;
+            width: 100%;
+            line-height: 28px;
+            display: table;
+        }
+        .middle{
+            display:table-cell;
+            vertical-align:middle;
+        }
+
+        .lay-guide .lay-guide-title:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #CCCCCC;
+        }
+
+        .lay-guide > .layui-row {
+            padding: 0px 15px;
+        }
+
+        .lay-guide > .layui-row:active {
+            background-color: #E7E7E7;
+        }
+
+        .lay-guide .lay-guide-icon {
+            margin-top: 10px;
+            float: right;
+            color: #999999
+        }
+
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        span {
+            font-size: 16px;
+        }
+
+        .lay-guide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #FFFFFF;
+        }
+
+        .lay-btn-close {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 30px !important;
+        }
+
+        .lay-btn-close:after {
+            position: absolute;
+            content: '';
+            width: 2px;
+            height: 20px;
+            top: -14px;
+            left: 14px;
+            background-color: #000000;
+        }
+
+        img {
+            width: 100% !important;
+            height: auto;
+        }
+
+        .model-title {
+            background-color: #959595;
+            font-size: 14px;
+            color: white;
+            padding: 2px 8px;
+            display: inline-block;
+            margin: 15px 0px 25px 0px;
+        }
+
+        .model-content {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 25px;
+            word-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-container lay-guide" style="padding: 0px; overflow-y: visible;">
+    <div class="layui-row" lay-item="item-1">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" >&#xe602;</i>
+                <span >Appearance and structure.</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-2">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right;">&#xe602;</i>
+                <span>How to connect a Bluetooth translation stick ?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-3">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right;" >&#xe602;</i>
+            <!--<marquee direction="left" behavior="scroll">-->
+                <!--What are the functions of the Bluetooth translation stick ?-->
+            <!--</marquee>-->
+                <span>What are the functions of the Bluetooth translation stick ?</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-row" lay-item="item-4">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>Can not boot?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-5">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>Can not find the device when connecting?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-6">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>How to use dialogue translation?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-7">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>How to use recording translation?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-8">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>How is the AI assistant used?</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-9">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>What should I pay attention to when charging?</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--外观和结构-->
+<div id="item-1" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >The text of the appearance is as follows:</span>
+        <img th:src="@{/images/guide/bl/bl_guide_en_1-1.png}"/>
+        <div style="text-align: left;font-size: 25px; margin: 10px 20px;">
+            <p >Function key</p>
+            <div class="model-content">
+                Switch button POWER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-1.png}"  ><br />
+                AI assistant function key &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon:
+                <img style="width: 20px !important; height: 20px !important" th:src="@{/images/guide/bl/icon_1-2.png}"  ><br />
+                Sound function button A, B button &nbsp; icon:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-3.png}"  >
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-4.png}"  ><br />
+                Recording function button &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-5.png}"  >
+            </div>
+            <p >Other appearance</p>
+            <div class="model-content">
+                Charging interface Micro 5pin<br />
+                Sound hole (microphone)<br />
+                Speaker <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--如何连接蓝牙翻译棒-->
+<div id="item-2" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">Connect the Bluetooth translation stick as follows:</span>
+        <p class="model-content">1、The first time using bluetooth translator should press the power button for more than 3 seconds to power on the bluetooth translator.</p>
+        <p class="model-content">2、Open the bluetooth switch on the mobile phone, the mobile phone bluetooth will automatically search for the name of the bluetooth device:BL Translator</p>
+        <p class="model-content">3、Open mobile phone WIFI or mobile data traffic.</p>
+        <p class="model-content">4、Some mobile phone systems need to turn on GPS positioning to connect to bluetooth. If you cannot connect, please turn on GPS to connect again.</p>
+        <p class="model-content">5、Click the icon to enter the APP interface and read the operation guide. When goes to the third operation guide need to waiting 5 seconds, it will automatically jump to the APP translation interface. You can also click the "skip" prompt in the upper right corner to enter the APP directly.</p>
+        <p class="model-content">6、The APP interface displays the bluetooth connection window. Click the name of matching bluetooth device to connect. After successful connection, there will be a prompt showing "bluetooth connection successful".</p>
+    </div>
+</div>
+
+<!--蓝牙翻译棒有哪些功能-->
+<div id="item-3" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">The functions of the Bluetooth translation stick are as follows:</span>
+        <div>
+            <p class="model-content" style="font-weight: bold">1、Dialogue translation:</p>
+            <div class="model-content" style="text-indent:2em;">Open the app of "BL Translator" to enter the main interface. The first is dialogue translation interface (as shown in the figure below). "" on the left side of the navigation bar of the interface "<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />" is the function menu bar.In the middle is the translation language item, click to select different languages, devided by A red and B blue; Click the middle arrow icon to switch the left and right sides of the voice position; The "●●●
+                "on the right side is the collecting button (the collected dialog content can be viewed here, deleted, etc.);Below the navigation bar is the session of translation workspace. The left side (the left language corresponding to the language area of the navigation bar) is controlled by the function A language key of the translation bar, and the right side (the right language corresponding to the language area of the navigation bar) is controlled by the function B language key.</div>
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-1.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">translation interface</p>
+            <div class="model-content" style="text-indent:2em;">
+                When pressing the "A" language key, start to speak (as shown in the pic below, the display will prompt “please speak Chinese “). After loosening the button, it will be instantly translated into the target language you choose on the other side, and there will be real-time voice broadcast. The translated content will be displayed on the screen, and you can swipe to view the translation record. Click on the translation statement again, and there will be a voice to broadcast. At the same time support voice, keyboard double input, click the small keyboard icon at the bottom of the screen, you can input the text content which you want to translate, click the "<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKYSURBVFhH7ZiLVeswDIY7QkfoCIzACGwAG8AIbAAbwAYwQTsCbAAbwAbcT+lvIydOmodTCjffOTp1ZFmWH5WdrAax2+2+VPzGlMhZfPC/Cdvt9kXFUtDPhYrf0M9TDMBHQnmt4h6rRB71eGxsQhRCOlt1Bc8bGT5LlaLKqpHKm6riEKHRX2PQuDRjX6zHTqp2nPGnVHtQprsLgrEeU+qVePxoNQ6o0VpyeJDBsJdxYJCxYb2o+D/DEj6oWA6cVvls8CoeAscx/2TkSmbDofFNzZlJd0rC4NwZ30rdwNmYNPN/F74xw3+TugLdrauftp+do2rB3POwiLvAWYyY0aT5qBQ4f0T2B/zCwlFgx1k2yF93psJ/pTppkdY0MwocxsPWxDKsqqZTdx5E1dPAUdZ5EJmNJ+cUKXP3zjjut3NYIDtbO1Oy2y1B+p0NvqFUDbB5CDaU+6dwGiRnrI1EVRH04b3B6l+l7g8Nr4IDE6kjQT/KeQAHsRMcfUhtU/Mm3fSTDUf+cLfcEm8bMpkOkb4Hp8WdB2od9HvPGwJOw3rcS1Ue60DFhYWFhZOC/LQmncezGSl7VZwLgr5zQXuZL5tPheBstru+RgQ5rfdQAuobuJcbNf85CGJw4Njb9eYesQtC+ZtHXwjE/zGzgs0nv3bpK/NlEoeXKo6GYPw3roZohot+IdrgNC4zZbtTj5oR7ycjZfc0nV1nOqmEOnuv6r3/sE3eYoLgx7bIfBkF59mOnZzLtJXcrKN75fd4X9zprGsg2ZMRfWOvHz3wOnTeNpDkSwTPluZi/exbZSgE8+wDNNFWsbxevTg7+fkDJweBndUCTcS2i0xPFwK1GbftUR9AuTw+NwQbB/ErZj2HzTjyO+7pCwt/ltXqH7SicNfFVqNEAAAAAElFTkSuQmCC" />" icon to send to achieve the translation function。
+            </div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_en_3-2.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-3.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">Voice receiving and keyboard input interface</p>
+            <div class="model-content" style="text-indent:2em;">There are 42 languages on both the left and right sides, which can be freely selected according to requirements. When you click the language option in the navigation bar ,it will pop up  the selected  language item . You can choose freely. The following pic shows some of the languages supported by the translator device.</div>
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-4.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">Language selection interface</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">2、recording translation：</p>
+            <div class="model-content" style="text-indent:2em;">Click the icon "<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />" in the upper left corner of the translation interface to enter the function menu bar, and click" recording translation "to enter the recording translation interface; Or press the recording translation key to enter directly (as shown in the figure below).</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_en_3-5.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-6.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">Sound recording translation and sound recording receiving translation interface</p>
+            <div class="model-content" style="text-indent:2em;">Long press the recording translation button for 3 seconds, and the "start recording" prompt box will pop up on the screen to start recording, in the meanwhile there Is  warning tone to indicate that it has been opened; Input the words you want to say into the translator, and the indicating  light will shows every 5 seconds during recording to indicate that you are recording. After recording, long press the record translation key for 3 seconds to close the recording, and the warning tone indicates that it is closed, the translation bar will automatically translate.</div>
+            <div class="model-content" style="text-indent:2em;">The translated conversation content will be automatically saved in the "<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVEhL7ZcBDcIwEEUnAQlIwAFIQAJScIAUcAAOmANwAA7gPtwnR3slZG3YMvqSl27NRtpe71ibFK14Ux9EHUvxoMbw0dcrbgff36FjHCy0DecLv2OmbfdfmGjL5bX+mLm2/bHRth8QCgZuLYYB9TyJlZIwITrD0AAbqk8i3AMC9ZqlpROY0/V5Gc015cDW4ChySBfRG3Lo25ph/qyiYWVNORUrlcKgpnEP79GhIM9xX8qt6G5hDIBfhTbPVyLyxCZRjmcxq3CNFywLlwl7gSAEXixzTIYAGw4f8PYBDMCrhTnWPeCCA4dNF2IPbKVM/p2jFvDkU/kHmuYOlae/88JxEM0AAAAASUVORK5CYII=" />" menu bar at the bottom right of the recording translation interface. Click on any file, it will automatically identify the translation and broadcast.</div>
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-7.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">Recording translation content saving interface</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">3、AI assistant：</p>
+            <div class="model-content" style="text-indent:2em;">Click the icon "<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />" in the upper left corner of the translation interface to enter the function menu bar, and click" AI assistant "to enter the AI assistant interface; Or press the AI assistant key to enter directly (as shown in the figure below).</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_en_3-8.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_en_3-9.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">AI assistant and AI assistant voice  receiving interface</p>
+            <div class="model-content" style="text-indent:2em;">Press the AI assistant button or the language icon on the screen and say what you want to do to the translator. For example, I ask "what's the weather like in shenzhen today? AI assistant will immediately answer the weather conditions in shenzhen today, and put forward suggestions for warmth. Or I want to listen to Andy Liu’s  "forget water", release the button, Andy liu’s "forget water" song began to play.</div>
+            <div class="model-content" style="text-indent:2em;">In addition to playing music, AI assistant can also do a lot of things, such as listening to the news, radio, stories, crosstalk, sketch, check stocks and so on, more novel gameplay are waiting for you to explore !</div>
+        </div>
+    </div>
+</div>
+
+<!--无法开机-->
+<div id="item-4" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">Unable to boot for the following reasons:</span>
+        <p class="model-content">1、Please check whether the bluetooth translator device has power. Connect the device with charger, and the device will be prompted by LED indicating shows normal charging. After charging for 10 minutes, long press the power button for more than 3 seconds to start up.</p>
+        <p class="model-content">2、Please confirm whether the power button is pressed to start the machine. The power button is on  top  of device.</p>
+        <p class="model-content">3、Please confirm whether to press the power button for more than 3 seconds.</p>
+    </div>
+</div>
+
+<!--连接时找不到设备-->
+<div id="item-5" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">The device could not be found when connecting for the following reasons:</span>
+        <p class="model-content">1、Please check whether the bluetooth window on the mobile phone is open.</p>
+        <p class="model-content">2、Please check whether the bluetooth translation device is turned on successfully.</p>
+        <p class="model-content">3、Please make sure the phone and bluetooth device are within the range of connection.</p>
+        <p class="model-content">4、Please confirm whether the mobile phone GPS positioning is enabled (limited to some mobile phone systems).</p>
+        <p class="model-content">5、Please confirm whether the mobile phone is on the network (WIFI or mobile data flow) before connecting to the network.</p>
+    </div>
+</div>
+
+<!--对话翻译如何使用-->
+<div id="item-6" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >How to use dialogue translation?</span>
+        <p style="text-indent:2em;">Open the APP translation interface, there is a language selection bar at the top of the interface, and the A red and B blue prompt boxes correspond to the two languages.</p>
+        <img th:src="@{/images/guide/bl/bl_guide_en_6-1.png}"/>
+        <p style="text-indent:2em;">There are two buttons "A, B" on the Bluetooth translation bar, which correspond to the language bar in the APP, A corresponds to the left language bar, and B corresponds to the right language bar.</p>
+        <img th:src="@{/images/guide/bl/bl_guide_en_6-2.png}"/>
+        <p style="text-indent:2em;">Note: Do not block the sound hole in your hand.</p>
+    </div>
+</div>
+
+<!--录音翻译如何使用-->
+<div id="item-7" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >The recording instructions are as follows:</span>
+        <p style="text-indent:2em;">Press and hold the record button for 3 seconds to turn on the recording, with a beep to indicate that it is on.
+            Lights up every 5 seconds during recording, indicating that recording is in progress.
+            Press and hold the record button for 3 seconds to turn off the recording, with a beep to indicate that it is off.</p>
+        <img th:src="@{/images/guide/bl/bl_guide_en_7-1.png}"/>
+    </div>
+</div>
+
+<!--AI助手如何使用-->
+<div id="item-8" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >The AI assistant's instructions are as follows:</span>
+        <p style="text-indent:2em;">Press and hold the AI button to collect voice commands, and release the button device to automatically broadcast.</p>
+        <img th:src="@{/images/guide/bl/bl_guide_en_8-1.png}"/>
+    </div>
+</div>
+
+<!--充电需要注意什么-->
+<div id="item-9" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">Note the charge as follows:</span>
+        <p class="model-content">1、The standard charge is 5V~ 0.5A. Please do not use the charger with a specification of more than 2.5w (0.5a /5V) for a long time. Excessive power will cause battery damage.</p>
+        <p class="model-content">2、Charging time should not exceed 5 hours.</p>
+        <p class="model-content">3、Charge one cycle at a time (1%~100%) to ensure the service life of the battery. The power can be viewed through the APP terminal. After the battery is fully charged, the LED light on the device will stop shining.</p>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer, $ = layui.jquery;
+
+
+        // 点击展开详细
+        $('.layui-row').on('click', function () {
+
+            var _dom = $(this).attr("lay-item");
+            if (_dom) {
+                var index = layer.open({
+                    type: 1,
+                    title: false,
+                    anim: 2,
+                    resize: false,
+                    closeBtn: 0,
+                    shade: false,
+                    content: $('#' + _dom)
+                });
+                layui.layer.full(index);
+            }
+        });
+
+        $('.lay-btn-close').on('click', function () {
+            layer.closeAll();
+        })
+
+    });
+</script>
+</body>
+</html>

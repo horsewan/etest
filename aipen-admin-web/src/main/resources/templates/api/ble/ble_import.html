@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <input class="layui-hide" id="pkgId" th:value="${pkgId}" />
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <label class="layui-form-label required" style="width: 120px">请选择Excel文件</label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="upload">
+                <i class="layui-icon">&#xe67c;</i>上传文件
+            </button>
+        </div>
+
+    </div>
+    <div class="layui-form-item layui-col-xs12 layui-col-md6 layui-col-lg4">
+        <p style="color: red; font-size: 12px; text-align: center">注意：Excel单元格格式必须为文本</p>
+    </div>
+</form>
+<script type="text/javascript" th:src="@{/layui/layui.js}" ></script>
+<script type="text/javascript" th:src="@{/js/api/ble-import.js}" ></script>
+</body>
+</html>

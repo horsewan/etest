@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>使用ガイド</title>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all"/>
+    <style>
+
+        *{
+            font-family: "Microsoft YaHei";
+        }
+
+        .lay-guide .lay-guide-title {
+            position: relative;
+            height: 55px;
+            width: 100%;
+            line-height: 28px;
+            display: table;
+        }
+        .middle{
+            display:table-cell;
+            vertical-align:middle;
+        }
+
+        .lay-guide .lay-guide-title:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #CCCCCC;
+        }
+
+        .lay-guide > .layui-row {
+            padding: 0px 15px;
+        }
+
+        .lay-guide > .layui-row:active {
+            background-color: #E7E7E7;
+        }
+
+        .lay-guide .lay-guide-icon {
+            margin-top: 10px;
+            float: right;
+            color: #999999
+        }
+
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        span {
+            font-size: 16px;
+        }
+
+        .lay-guide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #FFFFFF;
+        }
+
+        .lay-btn-close {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 30px !important;
+        }
+
+        .lay-btn-close:after {
+            position: absolute;
+            content: '';
+            width: 2px;
+            height: 20px;
+            top: -14px;
+            left: 14px;
+            background-color: #000000;
+        }
+
+        img {
+            width: 100% !important;
+            height: auto;
+        }
+
+        .model-title {
+            background-color: #959595;
+            font-size: 14px;
+            color: white;
+            padding: 2px 8px;
+            display: inline-block;
+            margin: 15px 0px 25px 0px;
+        }
+
+        .model-content {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 25px;
+            word-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-container lay-guide" style="padding: 0px; overflow-y: visible;">
+    <div class="layui-row" lay-item="item-1">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon">&#xe602;</i>
+                <span>外観と構造</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-2">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right;">&#xe602;</i>
+                <span>bluetooth翻訳バーの接続方法？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-3">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>bluetooth翻訳バーにはどのような機能がありますか？</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-row" lay-item="item-4">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>電源が入らないのか？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-5">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>接続中にデバイスが見つかりませんか？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-6">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>会話翻訳はどのように使用されますか？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-7">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>録音翻訳はどのように使用されますか？</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-8">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>AIアシスタントの使い方</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row" lay-item="item-9">
+        <div class="lay-guide-title">
+            <div class="middle">
+                <i class="layui-icon lay-guide-icon" style="float: right">&#xe602;</i>
+                <span>充電には何に注意が必要ですか</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--外观和结构-->
+<div id="item-1" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">外観説明文は以下の通り：</span>
+        <img th:src="@{/images/guide/bl/bl_guide_ja_1-1.png}"/>
+        <div style="text-align: left;font-size: 25px; margin: 10px 20px;">
+            <p >ファンクションキー</p>
+            <div class="model-content">
+                シャットダウンキーpowerアイコンをオンにします:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-1.png}"  ><br />
+                AIヘルパーのファンクションキーアイコン:
+                <img style="width: 20px !important; height: 20px !important" th:src="@{/images/guide/bl/icon_1-2.png}"  ><br />
+                採音機能キーa、bキーのアイコン:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-3.png}"  >
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-4.png}"  ><br />
+                録音ファンクションキーのアイコン:
+                <img style="width: 25px !important; height: 25px !important" th:src="@{/images/guide/bl/icon_1-5.png}"  >
+            </div>
+            <p >その他の外観</p>
+            <div class="model-content">
+                充電インターフェイスmicro5pin<br />
+                採音孔(マイク)<br />
+                スピーカー <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--如何连接蓝牙翻译棒-->
+<div id="item-2" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">Bluetoothを接続するステップは次の通りです：</span>
+        <p class="model-content">1、bluetooth翻訳装置を初めてオンにして、電源キーを3秒以上押して電源を入れます。</p>
+        <p class="model-content">2、携帯電話のbluetoothスイッチを入れると、携帯電話のbluetoothは自動的にbluetoothデバイス名:BL Translator。</p>
+        <p class="model-content">3、携帯電話のwifiをオンにするか、データフローを移動する。</p>
+        <p class="model-content">4、一部の携帯電話システムはGPS測位をオンにしてbluetoothに接続する必要があり、接続できない場合はGPSをオンにして再度接続してください。</p>
+        <p class="model-content">5、アイコンをクリックしてapp画面に入り、操作ガイドを読んで、3枚目の操作ガイドを読むと、自動的にapp翻訳画面にジャンプします。右上隅の「スキップ」をクリックしてapp画面に入ることもできます。</p>
+        <p class="model-content">6、appインターフェイスにbluetooth接続ウィンドウが表示され、bluetooth機器と一致する名前をクリックして接続すると、bluetooth機器に「bluetooth接続成功」というメッセージが表示されます。</p>
+    </div>
+</div>
+
+<!--蓝牙翻译棒有哪些功能-->
+<div id="item-3" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">Bluetoothの翻訳棒の機能は次のとおりです：</span>
+        <div>
+            <p class="model-content" style="font-weight: bold">1、会話翻訳:</p>
+            <div class="model-content" style="text-indent:2em;">「BL Translator」appを開いてメイン画面に入り、まず会話翻訳画面に入ります(下図参照)。この画面のナビゲーションバーの左側“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />
+                ”は機能メニューバーです 中間は翻訳言語項目で、クリックすると異なる言語を選択でき、a赤とb青に分けられる 中央の矢印アイコンをクリックすると、左右の音声を位置を切り替えることができます 右側“●●●
+                ”はお気に入りボタンです(お気に入りの会話の内容はここで確認、削除などができます) ナビゲーションバーの下にセッション翻訳ワークスペースがあり、左側(ナビゲーションバー言語領域に対応する左側の言語)は翻訳バーの機能a言語キーで制御され、右側(ナビゲーションバー言語領域に対応する右側の言語)は機能b言語キーで制御されます。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-1.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">翻訳インタフェース</p>
+            <div class="model-content" style="text-indent:2em;">
+                a言語キーを押すと、会話が始まり(下図のように、画面に中国語を話すヒントがある)、キーを放すとすぐに反対側の目的言語に翻訳され、音声リアルタイムでアナウンスされ、翻訳された内容が画面に表示され、翻訳記録をスライドして見ることができる。 再度翻訳された語句をクリックすると、音声でアナウンスされます。 音声・キーボードのダブル入力にも対応しており、画面下のキーパッドのアイコンをクリックすると、翻訳したいテキストの内容を入力できます。アイコンをクリックすると、翻訳機能が実現します“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKYSURBVFhH7ZiLVeswDIY7QkfoCIzACGwAG8AIbAAbwAYwQTsCbAAbwAbcT+lvIydOmodTCjffOTp1ZFmWH5WdrAax2+2+VPzGlMhZfPC/Cdvt9kXFUtDPhYrf0M9TDMBHQnmt4h6rRB71eGxsQhRCOlt1Bc8bGT5LlaLKqpHKm6riEKHRX2PQuDRjX6zHTqp2nPGnVHtQprsLgrEeU+qVePxoNQ6o0VpyeJDBsJdxYJCxYb2o+D/DEj6oWA6cVvls8CoeAscx/2TkSmbDofFNzZlJd0rC4NwZ30rdwNmYNPN/F74xw3+TugLdrauftp+do2rB3POwiLvAWYyY0aT5qBQ4f0T2B/zCwlFgx1k2yF93psJ/pTppkdY0MwocxsPWxDKsqqZTdx5E1dPAUdZ5EJmNJ+cUKXP3zjjut3NYIDtbO1Oy2y1B+p0NvqFUDbB5CDaU+6dwGiRnrI1EVRH04b3B6l+l7g8Nr4IDE6kjQT/KeQAHsRMcfUhtU/Mm3fSTDUf+cLfcEm8bMpkOkb4Hp8WdB2od9HvPGwJOw3rcS1Ue60DFhYWFhZOC/LQmncezGSl7VZwLgr5zQXuZL5tPheBstru+RgQ5rfdQAuobuJcbNf85CGJw4Njb9eYesQtC+ZtHXwjE/zGzgs0nv3bpK/NlEoeXKo6GYPw3roZohot+IdrgNC4zZbtTj5oR7ycjZfc0nV1nOqmEOnuv6r3/sE3eYoLgx7bIfBkF59mOnZzLtJXcrKN75fd4X9zprGsg2ZMRfWOvHz3wOnTeNpDkSwTPluZi/exbZSgE8+wDNNFWsbxevTg7+fkDJweBndUCTcS2i0xPFwK1GbftUR9AuTw+NwQbB/ErZj2HzTjyO+7pCwt/ltXqH7SicNfFVqNEAAAAAElFTkSuQmCC" />”。
+            </div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_ja_3-2.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-3.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">収音とキーボード入力インターフェイス</p>
+            <div class="model-content" style="text-indent:2em;">左右の言語には42の言語があり、必要に応じて自由に選択できます。ナビゲーションバーの言語オプションをクリックすると、選択する言語項目がポップアップし、自由に選択できます。下図は翻訳棒がサポートする言語の一部です。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-4.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">言語選択インタフェース</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">2、録音翻訳:</p>
+            <div class="model-content" style="text-indent:2em;">翻訳画面の左上隅にあるアイコン“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />”をクリックして機能メニューバーに入り、「録音翻訳」をクリックして録音翻訳画面に入ります または録音翻訳キーを短く押して直接入力します(下図参照)。</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_ja_3-5.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-6.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">録音翻訳と録音翻訳の収音インタフェース</p>
+            <div class="model-content" style="text-indent:2em;">録音翻訳キーを3秒長押しすると、画面に「録音開始」のメッセージボックスが表示され、録音がオンになったことを示すメッセージが表示されます 翻訳棒に言いたい言葉を入力すると、録音中に5秒ごとに点灯し、録音中であることを示します 録音後、録音翻訳キーを3秒長押しして録音をオフにし、音が出ていると、翻訳バーが自動的に翻訳されます。</div>
+            <div class="model-content" style="text-indent:2em;">翻訳された会話内容は、録音翻訳インタフェースの右下にある“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVEhL7ZcBDcIwEEUnAQlIwAFIQAJScIAUcAAOmANwAA7gPtwnR3slZG3YMvqSl27NRtpe71ibFK14Ux9EHUvxoMbw0dcrbgff36FjHCy0DecLv2OmbfdfmGjL5bX+mLm2/bHRth8QCgZuLYYB9TyJlZIwITrD0AAbqk8i3AMC9ZqlpROY0/V5Gc015cDW4ChySBfRG3Lo25ph/qyiYWVNORUrlcKgpnEP79GhIM9xX8qt6G5hDIBfhTbPVyLyxCZRjmcxq3CNFywLlwl7gSAEXixzTIYAGw4f8PYBDMCrhTnWPeCCA4dNF2IPbKVM/p2jFvDkU/kHmuYOlae/88JxEM0AAAAASUVORK5CYII=" />”メニューバーに自動的に保存されます。 いずれかのファイルをクリックすると、自動的に翻訳を認識してアナウンスします。</div>
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-7.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">録音翻訳コンテンツ保存インタフェース</p>
+        </div>
+        <div>
+            <p class="model-content" style="font-weight: bold">3、AIアシスタント:</p>
+            <div class="model-content" style="text-indent:2em;">翻訳画面の左上隅にあるアイコン“<img style="width: 25px !important; height: 25px !important;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAAHrvyFcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVEhLzZcBUcQwEEUrAQlIwAFIQAIScAAOQAIScHA4ACk4gP3t/cxvukk2bY7hzfxJSHb/brlr2puE03lM/GTjPLlbpvOYNnQxSMo1VgV0I8HF6mbOZh3t3Yrcdh9NWu5tme4A2aXeVhubIC8rrWFSClgFAV4qWCWVHBL4Q/9BNyYvaQOCqG68xLBZJLAYE0nOqZq1bgbsVwuqCSupQLeJ0mWiUmp7VR7O2gUSWbHbhMkYcXt3mWgyCZt4yaRpUksmRZNIMtmYMBlnY5SVCSaqFsX4Z1PUALEb1ODKpM8DHpQgZIDRE8AYMvhapjPfpm6Dj2U6g/nfGVCeARX5wjXhF3CoaZS8+EWusETrynmblfYP0SqeM7SZ3uI5h5o5Wjynq5nRxXOqzeTFIfw0gF5MI3gy0TOvNTfzLgue+EazF77xlPRqctGTb2QT7jFbotTEp4nrNekvveFNcA3Cx4g4Co863ScXa0IfTIoe4eRfNKF33+4mPEWa8NTVxLUJnzlMPd2bPHDVXjwEP7yoZUzTLxWUOlItC7wYAAAAAElFTkSuQmCC" />”をクリックして機能メニューバーに入り、「aiアシスタント」をクリックしてaiアシスタント画面に入ります AIヘルパーキーを短く押して直接アクセスすることもできます(下図参照)。</div>
+            <img style="margin-bottom: 10px" th:src="@{/images/guide/bl/bl_guide_ja_3-8.jpg}" />
+            <img th:src="@{/images/guide/bl/bl_guide_ja_3-9.jpg}" />
+            <p style="text-align: center;font-size: 18px; margin: 8px 0px;">AIアシスタントとAIアシスタントの収音インタフェース</p>
+            <div class="model-content" style="text-indent:2em;">AI助手のボタンか画面上の言語マークを押して、翻訳棒に向かってあなたがしたいことを話します。例えば、「深センの今日の天気はどうですか？」と聞いた。 AIアシスタントは、今日の深センの天気状況をすぐに回答し、保温アドバイスなどを提出します あるいは、私は劉徳華の「忘情水」を聞きたい、ボタンを離すと、劉徳華の「忘情水」が放送され始めた。</div>
+            <div class="model-content" style="text-indent:2em;">音楽だけでなく、AI助手はニュース、ラジオ、物語、漫才、小物、株を調べるなど、多くのことをすることができます。もっと目新しい遊び方が発掘を待っていますよ!</div>
+        </div>
+    </div>
+</div>
+
+<!--无法开机-->
+<div id="item-4" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">起動できない理由は次の通りです：</span>
+        <p class="model-content">1、bluetooth翻訳設備に電気があるかどうかをチェックして、充電器で設備を接続してください。設備にはledなどのヒントがあり、正常に充電されていることを示して、充電してから10分後に電源キーを3秒以上押して電源を入れてください。</p>
+        <p class="model-content">2、電源キーを押して電源を入れているか確認してください 電源キーは真上のキーです。</p>
+        <p class="model-content">3、電源キーを3秒以上長押ししていないか確認してください。</p>
+    </div>
+</div>
+
+<!--连接时找不到设备-->
+<div id="item-5" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">接続時にデバイスの原因が見つかりません：</span>
+        <p class="model-content">1、携帯電話側のbluetoothウィンドウが開いているかどうかチェックしてください。</p>
+        <p class="model-content">2、bluetooth翻訳装置の電源が入っているかどうかを確認してください。</p>
+        <p class="model-content">3、携帯電話とbluetooth機器が接続可能な距離以内であることを確認してください。</p>
+        <p class="model-content">4、携帯電話のGPS測位がonになっているか確認してください(一部の携帯電話システムのみ)。</p>
+        <p class="model-content">5、携帯電話がネットワーク( wifiまたはモバイルデータトラフィック)をオンにしていないか確認し、ネットワーク状態で接続できるようにしてください。</p>
+    </div>
+</div>
+
+<!--对话翻译如何使用-->
+<div id="item-6" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >会話翻訳はどのように使用されますか？</span>
+        <p style="text-indent:2em;">app翻訳インタフェースを開くと、インタフェースの上に言語選択欄があり、a赤とb青のヒントボックスが2つの言語に対応しています。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_ja_6-1.png}"/>
+        <p style="text-indent:2em;">bluetooth翻訳バーには「a、b」の2つのボタンがあり、それぞれapp中の言語欄、aは左の言語欄、bは右の言語欄に対応している。</p>
+        <img th:src="@{/images/guide/bl/bl_guide_ja_6-2.png}"/>
+        <p style="text-indent:2em;">注意:握手は音孔をふさがないでください</p>
+    </div>
+</div>
+
+<!--录音翻译如何使用-->
+<div id="item-7" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >録音説明文は以下の通り：</span>
+        <p style="text-indent:2em;">録音中に録音ボタンを3秒間押すと録音がオンになり、音声が表示されてオンになったことを示します。
+            中5秒ごとに点灯し、録音中であることを示します。
+            録音ボタンを3秒間長押しして録音をオフにし、音が出ていることを示すとオフになっています。
+        </p>
+        <img th:src="@{/images/guide/bl/bl_guide_ja_7-1.png}"/>
+    </div>
+</div>
+
+<!--AI助手如何使用-->
+<div id="item-8" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title" >AIアシスタントは、ドキュメントを説明します：</span>
+        <p style="text-indent:2em;">AIキーを長押しして音声コマンドを収集し、キーデバイスの自動アナウンスを解除します。      </p>
+        <img th:src="@{/images/guide/bl/bl_guide_ja_8-1.png}"/>
+    </div>
+</div>
+
+<!--充电需要注意什么-->
+<div id="item-9" class="layui-container lay-guide-content" style="display: none">
+    <i class="layui-icon layui-icon-close-fill lay-btn-close" style="font-size: 30px !important;">&#x1007;</i>
+    <div class="lay-model-content">
+        <span class="model-title">充電は次のように注意します：</span>
+        <p class="model-content">1、標準充電は5 v~0.5 aで、2.5 w (0.5a/5 v )以上の充電器を長期間使用しないでください。過大な電力が機器の電池を損傷させます。</p>
+        <p class="model-content">2、設備の充電時間は5時間を超えないでください。</p>
+        <p class="model-content">3、一度に1サイクル(1%~ 100 %)充電して、電池の寿命を保証して、電力量はapp側で見ることができ、電池が満杯になると機器のledが点灯しなくなる。</p>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer, $ = layui.jquery;
+
+
+        // 点击展开详细
+        $('.layui-row').on('click', function () {
+
+            var _dom = $(this).attr("lay-item");
+            if (_dom) {
+                var index = layer.open({
+                    type: 1,
+                    title: false,
+                    anim: 2,
+                    resize: false,
+                    closeBtn: 0,
+                    shade: false,
+                    content: $('#' + _dom)
+                });
+                layui.layer.full(index);
+            }
+        });
+
+        $('.lay-btn-close').on('click', function () {
+            layer.closeAll();
+        })
+
+    });
+</script>
+</body>
+</html>

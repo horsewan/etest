@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.UserFriendMapper">
+
+    <!--根据手机号查询-->
+    <select id="selectFriendByMobile" resultType="com.eningqu.domain.api.UserFriend">
+        select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE friend_mobile = #{mobile}
+    </select>
+
+    <!--根据手机号查询用户ID-->
+    <select id="selectUserIDByMobile" resultType="Long">
+        select id from nq_user_info WHERE mobile = #{mobile}
+    </select>
+
+    <!--根据用户ID查询好友-->
+    <select id="selectFriendByUserId" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai , f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks , u.remarks  from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}
+        <!--select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} -->
+    </select>
+
+    <!--根据用户ID查询非好友-->
+    <select id="selectUserByUserId" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT id, nick_name, head_img, sex, mobile, credential,address_d,address_x,address_y,remarks FROM nq_user_info WHERE id = #{user_id}
+    </select>
+    <!--根据手机查到用户信息-->
+    <select id="selectUserByMobile" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT id, nick_name, head_img, sex, mobile, credential,address_d,address_x,address_y,remarks FROM nq_user_info WHERE mobile = #{mobile}
+    </select>
+
+    <!--查询是否是好友-->
+    <select id="selectFriendExists" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks, u.remarks  from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id} AND user_friend_id = #{user_friend_id}
+    </select>
+
+    <!--根据用户查询条件查询所有人 '%' + -->
+    <select id="selectByCondition" resultType="com.eningqu.domain.api.UserInfo">
+        <bind name="pattern" value="_parameter.s_condition + '%'" />
+        SELECT id, nick_name, head_img, sex, mobile, credential,remarks FROM nq_user_info WHERE ( mobile like #{pattern} OR nick_name like #{pattern}  ) AND del_status = 'Y' limit 0,50
+    </select>
+
+    <!--根据用户查询条件查询未添加的好友  '%' +-->
+    <select id="selectByIdCondition" resultType="com.eningqu.domain.api.UserInfo">
+        <bind name="pattern" value="_parameter.s_condition + '%'" />
+        SELECT id, nick_name, head_img, sex, mobile, credential,remarks FROM nq_user_info WHERE ( mobile like #{pattern} OR nick_name like #{pattern}  ) AND del_status = 'Y' AND id &lt;&gt; #{user_id} AND id not in (select user_friend_id from nq_user_friend  where user_id = #{user_id} ) limit 0,50
+    </select>
+
+
+    <!--查询本身用户信息-->
+    <select id="getUserInfoById" resultType="com.eningqu.domain.api.UserInfo">
+        SELECT id, nick_name, head_img, sex, mobile, credential ,address_d,address_x,address_y,remarks  FROM nq_user_info WHERE id = #{user_id}
+    </select>
+
+    <!--加好友-->
+    <insert id="addFriend"  useGeneratedKeys="true" keyProperty="id">
+        insert into nq_user_friend(user_id, user_friend_id,friend_mobile,friend_nickname,isai) values(#{user_id}, #{friend_user_id},#{friend_mobile},#{friend_nickname},#{isai} )
+    </insert>
+
+    <!--删除好友-->
+    <insert id="delFriend"  useGeneratedKeys="true" keyProperty="id">
+        delete from  nq_user_friend where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </insert>
+
+    <!-- 拉黑某个用户 -->
+
+    <update id="setFriendBlack"  keyProperty="id">
+        update nq_user_friend set blacklist='Y' where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </update>
+
+    <!-- 拉白某个用户 -->
+    <update id="setFriendWhite"  keyProperty="id">
+        update nq_user_friend set blacklist='N' where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </update>
+
+    <!-- 得到好友黑名单列表 -->
+    <select id="selectBlackList" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks , u.remarks from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}  AND blacklist='Y'
+       <!-- select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} AND blacklist='Y' -->
+    </select>
+
+    <!-- 得到好友白名单列表 -->
+
+    <select id="selectWhiteList" resultType="com.eningqu.domain.api.UserFriend">
+        <!--select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} AND blacklist='N' -->
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks , u.remarks  from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}  AND blacklist='N'
+    </select>
+
+    <!-- 设置好友分类 -->
+    <update id="setFriendFType"  keyProperty="id">
+        update nq_user_friend set ftype=#{ftype} where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </update>
+
+    <!-- 设置好友分类 -->
+    <update id="setFriendAI"  keyProperty="id">
+        update nq_user_friend set isai=#{isai} where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </update>
+
+
+    <!-- 得到某个分类的全部好友 -->
+
+    <select id="selectFriendListByFtype" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks , u.remarks from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}   AND ftype=#{ftype}
+        <!--select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} AND ftype=#{ftype} AND blacklist='N'-->
+    </select>
+
+    <!-- 得到某个分类的白名单好友 -->
+
+    <select id="selectWhiteListByFtype" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks ,u.remarks from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}  AND ftype=#{ftype} AND blacklist='N'
+        <!--select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} AND ftype=#{ftype} AND blacklist='N'-->
+    </select>
+
+    <select id="selectWhiteListByNFtype" resultType="com.eningqu.domain.api.UserFriend">
+        select f.id,f.user_id,f.user_friend_id,u.mobile as friend_mobile,u.nick_name as friend_nickname,f.isai as isai,f.blacklist as blacklist,f.ftype,u.address_d,u.address_x,u.address_y,u.sex,u.head_img,u.agent_no,f.remarks as fremarks ,u.remarks from nq_user_friend f,nq_user_info u  WHERE f.user_friend_id =u.id  AND user_id = #{user_id}  AND ftype &lt;&gt; #{ftype} AND blacklist='N'
+        <!--select id,user_id,user_friend_id,friend_mobile,friend_nickname,isai,blacklist,ftype from nq_user_friend WHERE user_id = #{user_id} AND ftype=#{ftype} AND blacklist='N'-->
+    </select>
+
+
+    <!-- 设置好友标签 -->
+    <update id="setFriendRemarks"  keyProperty="id">
+        update nq_user_friend set remarks=#{remarks} where user_id = #{user_id} AND user_friend_id=#{user_friend_id}
+    </update>
+
+    <!-- 收发红包纪录 -->
+    <insert id="insertGiftMoneyDetail" parameterType="com.eningqu.domain.api.UserCreditRecord" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+        insert into nq_user_vip_record(uid, vip_credit,vip_hongbao,vip_status,fid,remarks,create_time,update_time,source,pvid,namount,hbcount,ncount) values(#{uid},#{vipCredit},#{vipHongbao},#{vipStatus}, #{fid},#{remarks} , now() , now() ,#{source}, #{pvid} , #{namount} , #{hbcount} , #{ncount} )
+    </insert>
+    <!-- 发红包 -->
+    <!--<insert id="sendGiftMoney" useGeneratedKeys="true" keyProperty="id">
+        insert into nq_user_vip_record(uid, vip_credit,vip_hongbao,vip_status,fid,remarks) values(#{user_id}, #{friend_user_id},#{friend_mobile},#{friend_nickname} )
+    </insert> -->
+    <!-- 得到当前红包余额 -->
+    <select id="getGiftMoneyByID"  resultType="String" >
+       select vip_credit from nq_user_vip where uid = #{user_id}
+    </select>
+    <!-- 通过ID得到已发红包 -->
+    <select id="getSendedGiftMoneyByID"  resultType="com.eningqu.domain.api.UserCreditRecord" >
+        select id,uid,vip_credit,vip_hongbao,vip_status,fid,remarks,source,pvid,hbcount,ncount,namount from nq_user_vip_record where id = #{id}
+    </select>
+
+    <!-- 通过好友和用户得到所有已发红包或者已收红包 -->
+    <select id="getufGiftMoneyList"  resultType="com.eningqu.domain.api.UserCreditRecord" >
+        select id,uid,vip_credit,vip_hongbao,vip_status,fid,remarks,source,pvid,hbcount,ncount,namount from nq_user_vip_record where uid = #{uid} AND fid =  #{fid} AND vip_hongbao = -1 AND vip_status = #{vipStatus}
+    </select>
+
+    <!-- 更新红包余额 -->
+    <update id="updateGiftMoneyByID"  >
+        update nq_user_vip set vip_credit = #{amount}  where uid = #{user_id}
+    </update>
+
+    <!-- 得到AI的id -->
+    <select id="getAIid"  resultType="String" >
+        SELECT  d.mac  from nq_user_info u , dy_single_agent d  where u.agent_no=d.ausn and  u.id =  #{user_id}
+    </select>
+
+    <!-- 得到AI的id -->
+    <select id="getAIidByTeam"  resultType="String" >
+        SELECT  t.signature  from nq_user_info u , dy_team_agent t  where u.agent_no=t.app_pkg and u.id =  #{user_id}
+    </select>
+
+    <!-- 得到AI的市级代理 -->
+    <select id="getAIidBySys"  resultType="String" >
+        SELECT  s.phone  from nq_user_info u , sys_user s  where u.agent_no=s.login_name and u.id =  #{user_id}
+    </select>
+
+
+    <!-- 更新红包余额明细 -->
+    <update id="updateSendedGiftMoneyByID"  >
+        update nq_user_vip_record set vip_status = #{vipStatus} , pvid= #{pvid}, ncount= #{ncount} , namount= #{namount} , source= #{source}, update_time =  now()  where id = #{id}
+    </update>
+
+    <!-- 查询群红包被抢的明细-->
+    <select id="getGroupGiftMoneyList"  resultType="com.eningqu.domain.api.UserCreditRecord" >
+        select id,uid,vip_credit,vip_hongbao,vip_status,fid,remarks,source,pvid,hbcount,ncount,namount,create_time from nq_user_vip_record where ( pvid = #{pvid}
+        <if test="user_id == null">
+        OR id= #{pvid}
+        </if>
+        )
+        <if test="user_id != null">
+              and uid = #{user_id}
+        </if>
+    </select>
+
+</mapper>

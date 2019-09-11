@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.modules.api.mapper.BleMapper">
+
+    <select id="queryByWhere" resultType="com.eningqu.domain.api.BleDevice">
+        SELECT
+            id,
+            mac
+        FROM
+        dy_single_agent
+        WHERE
+          mac = #{mac}
+          LIMIT 1
+    </select>
+    <update id="updateBleDeviceByPhone">
+        UPDATE
+        dy_single_agent
+        SET
+        mac = #{phone}
+        WHERE
+        id = #{id}
+    </update>
+</mapper>

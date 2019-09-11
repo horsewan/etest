@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>订单信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+    <style>
+        tbody .layui-table-cell{
+            height: 35px;
+            line-height: 35px;
+        }
+        .noScroll{
+            overflow: hidden !important;
+        }
+    </style>
+</head>
+<body class="childrenBody">
+<!-- 查询 -->
+<blockquote class="layui-elem-quote quoteBox">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-input-inline layui-hide" style="width: 140px">
+                <input type="text" name="uid" class="layui-input" placeholder="手机号" />
+            </div>
+            <div class="layui-input-inline" style="width: 160px">
+                <input type="text" name="orderNumber" class="layui-input" placeholder="订单号" />
+            </div>
+            <div class="layui-input-inline">
+                <label class="layui-form-label" style="width: 80px;">订单状态:</label>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <select name="orderStatus" >
+                        <option value="">订单状态</option>
+                        <option th:each="item:${orderStatus}" th:value="${item.valueCode}" th:text="${item.labelName}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <label class="layui-form-label" style="width: 80px;">支付时间:</label>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <input type="text" id="payTimeStart" name="payTimeStart" placeholder="开始时间" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-input-inline">-</div>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <input type="text" id="payTimeEnd" name="payTimeEnd" placeholder="结束时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <button type="button" class="layui-btn" id="search">
+                <i class="layui-icon">&#xe615;</i> 搜索
+            </button>
+            <button type="button" lay-submit="" class="layui-btn layui-btn-warm" lay-filter="uploadImg">
+                <i class="layui-icon"></i>导出Excel</button>
+            <button type="reset" class="layui-btn layui-btn-primary" id="searchReset">
+                 清空
+            </button>
+        </div>
+    </form>
+</blockquote>
+<table id="orderTableList" lay-filter="orderTableList"></table>
+<div>
+    <script type="text/javascript">
+        var auth_detail = 'layui-hide';
+        var auth_exp = 'layui-hide';
+    </script>
+</div>
+<div shiro:hasPermission="mall:orders:detail">
+    <script type="text/javascript">
+        auth_detail = '';
+    </script>
+</div>
+<div shiro:hasPermission="mall:orders:exp">
+    <script type="text/javascript">
+        auth_exp = '';
+    </script>
+</div>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/api/orders-list.js}" ></script>
+<script type="text/javascript" th:src="@{/layui/layExcel.js}"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+spring:
+
+  profiles:
+    active: @profileActive@
+
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 171341296@qq.com
+    # 授权码
+    password: nkcamgmmjbfvbiif
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  output:
+    ansi:
+      enabled: always
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.eningqu.domain.system,com.eningqu.domain.api
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断"; 1:"非 NULL 判断"; 2:"非空判断"
+    field-strategy: 2
+    auto-set-db-type: true
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper调试神器
+    refresh-mapper: true
+    metaObjectHandler: com.eningqu.common.mybatisplus.SysMetaObjectHandler
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+# tomcat配置
+server:
+  context-path: /
+  port: 8080
+  session-timeout: 3600
+  tomcat:
+    uri-encoding: utf-8
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    port-header: X-Forwarded-Port
+    max-connections: 1000
+    # 最大线程数
+    max-threads: 200
+    # 最小备用线程数
+    min-spare-threads: 50
+    use-forward-headers: true
+  #   Tomcat调优配置
+#  undertow:
+#    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+#    # 不要设置过大，如果过大，启动项目会报错：打开文件数过多
+#    io-threads: 8
+#    # 阻塞任务线程池, 当执行类似servlet请求阻塞IO操作, undertow会从这个线程池中取得线程
+#    # 它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
+#    worker-threads: 64
+#    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+#    # 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+#    buffer-size: 1024
+#    # 是否分配的直接内存(NIO直接分配的堆外内存)
+#    direct-buffers: true
+
+
+# Shiro配置
+shiro:
+  # 无认证访问URL
+  anon-urls:
+    - /
+    - /login
+    - /getAppUrl
+    - /getRedisKeySet
+    - /captcha
+    - /test/**
+    - /email/**
+    - /favicon.ico
+    - /css/**
+    - /js/**
+    - /images/**
+    - /fonts/**
+    - /layui/**
+    - /ueditor/**
+    - /nq/guide/**
+
+# 七牛云配置
+qiniu:
+  domain: http://image.futruedao.com/
+  bucket: products-image
+  access-key: fP6KfIAAIJG0ZpEQQGxwbfu6TZyF_r2mCt5GHRUb
+  secret-key: V4cKW3F5X0BxyGFua_A606uuQB2asJUHIJTt03TX
+
+# 小牛token秘钥
+niutrans:
+  token:
+    key: 604abd44c 

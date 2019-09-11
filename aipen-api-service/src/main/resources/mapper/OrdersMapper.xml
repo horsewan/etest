@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.OrdersMapper">
+
+    <!--查询订单列表-->
+    <resultMap id="ordersListMap" type="com.eningqu.vo.OrdersListVO">
+        <result column="id" property="id" />
+        <result column="order_number" property="orderNumber" />
+        <result column="order_status" property="orderStatus" />
+        <result column="serial_number" property="serialNumber" />
+        <!--<result column="exp_way" property="expWay" />-->
+        <result column="exp_no" property="expNo" />
+        <result column="sign_name" property="signName" />
+        <result column="sign_phone" property="signPhone" />
+        <result column="sign_address" property="signAddress" />
+        <result column="order_time" property="orderTime" />
+        <result column="pay_time" property="payTime" />
+        <result column="amount_payable" property="amountPayable" />
+        <result column="amount_realpay" property="amountRealpay" />
+    </resultMap>
+    <resultMap id="ordersListMap2" type="com.eningqu.vo.OrdersListVO2">
+        <result column="id" property="id" />
+        <result column="order_number" property="orderNumber" />
+        <result column="order_status" property="orderStatus" />
+        <result column="product_name" property="proName" />
+        <result column="thumb_pic_url" property="proImg" />
+        <result column="order_price" property="orderPrice" />
+        <result column="original_price" property="proPrice" />
+        <result column="sale_price" property="salePrice" />
+    </resultMap>
+    <select id="selectOrders2List" resultMap="ordersListMap2">
+        <!--SELECT od.id,od.order_number,od.order_price,ods.order_status,pro.product_name
+        ,pro.thumb_pic_url,pro.original_price,pro.sale_price
+        FROM nq_orders_detail as od,nq_product as pro,nq_orders as ods
+        where ods.uid=od.uid and pro.id=od.product_id and ods.uid=#{uid} AND ods.order_status=#{orderSta} group by od.id-->
+        <!--select od.id,od.order_number,od.order_price,pro.product_name,ods.order_status
+        ,pro.thumb_pic_url,pro.original_price,pro.sale_price from nq_orders_detail as od,nq_product as pro,
+        (SELECT od.order_number,od.order_status FROM nq_orders as od where od.uid=#{uid} and od.order_status in('1','2') group by od.order_number) as ods
+        where od.product_id = pro.id and od.order_number=ods.order_number-->
+        <!--select od.id,uod.adid,od.order_number,od.order_price,pro.product_name,ods.order_status
+        ,pro.thumb_pic_url,pro.original_price,pro.sale_price from dy_orders_detail as od,dy_product as pro,nq_user_order_address as uod,
+        (SELECT od.order_number,od.order_status FROM dy_orders as od where od.uid=#{uid} and od.order_status in('1','2','3','4') group by od.order_number) as ods
+        where od.product_id = pro.id and od.order_number=ods.order_number and uod.order_number=ods.order_number order by od.id desc-->
+        select od.id,od.order_number,od.order_price,pro.product_name,ods.order_status
+        ,pro.thumb_pic_url,pro.original_price,pro.sale_price from dy_orders_detail as od,dy_product as pro,
+        (SELECT od.order_number,od.order_status FROM dy_orders as od where od.uid=#{uid} and od.amount_realpay is not null and od.order_status in('1','2','3','4') group by od.order_number) as ods
+        where od.product_id = pro.id and od.order_number=ods.order_number order by od.id desc
+    </select>
+
+    <select id="selectOrdersList" resultMap="ordersListMap">
+        SELECT
+            id,
+            order_status,
+            serial_number,
+<!--            exp_way,-->
+            exp_no,
+            sign_name,
+            sign_phone,
+            sign_address,
+            order_time,
+            pay_time,
+            amount_payable,
+            amount_realpay
+        FROM
+        dy_orders
+            WHERE uid = #{uid}
+    </select>
+
+    <!--根据用户ID和订单号查询订单记录-->
+    <select id="selectOrderByOrderNumberForUid" resultType="com.eningqu.domain.api.Orders">
+      SELECT id,business_id, order_number, order_status, amount_payable FROM dy_orders WHERE uid = #{uid} AND order_number = #{orderNumber}
+    </select>
+
+    <!--根据订单号查询订单记录-->
+    <select id="selectOrderByOrderNumber" resultType="com.eningqu.domain.api.Orders">
+        SELECT id,business_id, order_number, order_status, amount_payable FROM dy_orders WHERE order_number = #{orderNumber}
+    </select>
+
+    <select id="queryOrderByNumber" resultType="com.eningqu.domain.api.Orders">
+        SELECT id, uid, business_id, order_number, order_status, serial_number, exp_company, exp_code, exp_no, sign_name, sign_phone, sign_address, order_time, pay_way, pay_time, amount_payable, amount_realpay, update_name, update_time, remarks FROM dy_orders WHERE order_number = #{orderNumber}
+    </select>
+
+    <!--更新成功支付的订单信息 订单初始状态为【待支付】-->
+    <update id="updatePayNotifyOrder">
+      UPDATE dy_orders
+      SET
+        order_status = #{order.orderStatus},
+        amount_realpay = #{order.amountRealpay},
+        pay_time = #{order.payTime},
+        pay_way = #{order.payWay},
+        serial_number =  #{order.serialNumber}
+      WHERE
+        id = #{order.id} AND order_number = #{order.orderNumber} AND order_status = #{originalOrderStatus}
+    </update>
+    <update id="updateUnionPayNotifyOrder">
+        UPDATE dy_orders
+        SET
+        order_status = #{order.orderStatus}
+        WHERE
+        id = #{order.id} AND order_number = #{order.orderNumber}
+    </update>
+</mapper>

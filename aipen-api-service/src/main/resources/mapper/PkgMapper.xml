@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eningqu.mapper.PkgMapper">
+
+    <!--根据包名查询-->
+    <select id="selectByWhere" resultType="com.eningqu.domain.api.AppInfo">
+        SELECT
+          id,
+          app_pkg AS appPkg,
+          signature,
+        app_name,
+        create_time,
+          enable_status as enableStatus
+        FROM
+        dy_team_agent
+        WHERE app_pkg = #{pkgName} LIMIT 1
+    </select>
+    
+</mapper>

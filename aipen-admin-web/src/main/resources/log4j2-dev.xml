@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="OFF" monitorInterval="30">
+
+    <Properties>
+        <property name="log_home">d://logs</property>
+        <property name="console_log_pattern">%highlight{%date{yyyy-MM-dd HH:mm:ss} | %level{5} | %t | %c{36}:%M ---> %msg%xEx%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=blue, TRACE=black}</property>
+        <property name="file_log_pattern">%date{yyyy-MM-dd HH:mm:ss} | %level{5} | %t | %c{36}:%M ---> %msg%xEx%n</property>
+        <property name="file_size">10 MB</property><!-- 日志切割的最小单位 -->
+        <property name="output_log_level">info</property><!-- 日志输出级别 -->
+        <property name="project_name">aipen-admin-web</property><!-- 项目名称 -->
+    </Properties>
+
+	<!-- <appender name="poll" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File" value="${log_home}//${project_name}-info.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %t %5p [%c:%L] - %m%n" />
+		</layout>
+	</appender> -->
+ 
+    <appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="trace"/>
+            <PatternLayout pattern="${console_log_pattern}"/>
+        </Console>
+        
+        <RollingFile name="poll" fileName="${log_home}//${project_name}-info.log"
+                     filePattern="${log_home}/${date:yyyy-MM}/${project_name}-info-%d{yyyy-MM-dd}-%i.log.gz" append="false">
+            <PatternLayout charset="UTF-8" pattern="${file_log_pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="${file_size}" />
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="info"></logger>
+        <logger name="org.mybatis" level="info"></logger>
+        <logger name="com.ue.springboot.mapper" level="debug" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.thymeleaf" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.zaxxer.hikari" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.mysql" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.baomidou.mybatisplus" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.hibernate" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.shiro" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.crazycake.shiro" level="error" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="com.eningqu.modules.system.controller.SysServerConfigController" level="info" additivity="false">
+            <appender-ref ref="poll"/>
+        </logger>
+        <root level="debug">
+            <appender-ref ref="Console"/>
+            <!-- <appender-ref ref="poll"/> -->
+        </root>
+
+    </loggers>
+</configuration>
