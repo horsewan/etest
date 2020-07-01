@@ -59,7 +59,7 @@
         <dom4j.version>1.6.1</dom4j.version>
         <alipay.version>3.3.4.ALL</alipay.version>
         <httpclient.version>4.5.5</httpclient.version>
-        <quartz.version>2.2.3</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <zxing.version>3.3.3</zxing.version>
         <compiler.version>3.6.2</compiler.version>
         <!--<baidu.aip.version>4.3.2</baidu.aip.version>-->
