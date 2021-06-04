@@ -58,7 +58,7 @@
         <json.version>20170516</json.version>
         <dom4j.version>1.6.1</dom4j.version>
         <alipay.version>3.3.4.ALL</alipay.version>
-        <httpclient.version>4.5.5</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <quartz.version>2.2.3</quartz.version>
         <zxing.version>3.3.3</zxing.version>
         <compiler.version>3.6.2</compiler.version>
