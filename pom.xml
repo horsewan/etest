@@ -50,7 +50,7 @@
         <hutool.version>4.1.18</hutool.version>
         <beetl.version>2.7.28</beetl.version>
         <qiniu.version>7.2.12</qiniu.version>
-        <bouncycastle.version>1.58</bouncycastle.version>
+        <bouncycastle.version>1.67</bouncycastle.version>
         <ehcache.version>3.3.2</ehcache.version>
         <admin-server.version>1.5.6</admin-server.version>
         <aliyun-java-sdk-core.version>3.7.1</aliyun-java-sdk-core.version>
